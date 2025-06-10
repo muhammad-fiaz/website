@@ -3,7 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../../styles/global.css';
 import Favicon from '@src/assets/img/favicon.png';
-import { Schema } from "astro-seo-schema";
+import { Schema } from 'astro-seo-schema';
 
 interface Props {
 	title: string;
@@ -75,93 +75,90 @@ const { title, description, image = 'https://avatars.githubusercontent.com/u/754
 
 	<Schema
 		item={{
-			"@context": "https://schema.org",
-			"@type": "Person",
-			name: "Muhammad Fiaz",
-			url: "https://github.com/muhammad-fiaz",
-			sameAs: [
-				"https://github.com/muhammad-fiaz",
-				"https://www.linkedin.com/in/muhammad-fiaz-/"
-			],
-			jobTitle: "Full Stack Developer",
-			email: "contact@muhammadfiaz.com"
+			'@context': 'https://schema.org',
+			'@type': 'Person',
+			name: 'Muhammad Fiaz',
+			url: 'https://github.com/muhammad-fiaz',
+			sameAs: ['https://github.com/muhammad-fiaz', 'https://www.linkedin.com/in/muhammad-fiaz-/'],
+			jobTitle: 'Full Stack Developer',
+			email: 'contact@muhammadfiaz.com'
 		}}
 	/>
 	<Schema
 		item={{
-			"@context": "https://schema.org",
-			"@type": "FAQPage",
+			'@context': 'https://schema.org',
+			'@type': 'FAQPage',
 			mainEntity: [
 				{
-					"@type": "Question",
-					name: "Who are you?",
+					'@type': 'Question',
+					name: 'Who are you?',
 					acceptedAnswer: {
-						"@type": "Answer",
+						'@type': 'Answer',
 						text: "Hey there! 👋 I'm Muhammad Fiaz, a Full Stack developer passionate about coding since childhood. I build innovative solutions using a variety of technologies like Next.js, Node.js, Python, TypeScript, Go, Rust, Flutter, and GenAI. I'm also diving into MLOps and always eager to learn new tools and techniques. For more about me, check out my GitHub!"
 					}
 				},
 				{
-					"@type": "Question",
-					name: "What technologies do you use?",
+					'@type': 'Question',
+					name: 'What technologies do you use?',
 					acceptedAnswer: {
-						"@type": "Answer",
-						text: "I am a full-stack developer with a focus on both frontend and backend technologies. I mostly use tools like Next.js, TypeScript, Node.js, Python (Django, Flask, FastAPI), MongoDB, and SQL for my regular basis projects. I am also diving into Generative AI, Machine Learning, and Data Science to build smarter, data-driven full-stack applications. For more details on my tech stack and projects, please check out my GitHub page."
+						'@type': 'Answer',
+						text: 'I am a full-stack developer with a focus on both frontend and backend technologies. I mostly use tools like Next.js, TypeScript, Node.js, Python (Django, Flask, FastAPI), MongoDB, and SQL for my regular basis projects. I am also diving into Generative AI, Machine Learning, and Data Science to build smarter, data-driven full-stack applications. For more details on my tech stack and projects, please check out my GitHub page.'
 					}
 				},
 				{
-					"@type": "Question",
-					name: "Can we hire you?",
+					'@type': 'Question',
+					name: 'Can we hire you?',
 					acceptedAnswer: {
-						"@type": "Answer",
+						'@type': 'Answer',
 						text: "Yes, I am currently looking for job opportunities! Feel free to reach out to me via email or LinkedIn if you're interested in hiring me or collaborating on exciting projects. You can contact me through: Email: contact@muhammadfiaz.com, LinkedIn: muhammad-fiaz-"
 					}
 				},
 				{
-					"@type": "Question",
-					name: "How can I collaborate with you?",
+					'@type': 'Question',
+					name: 'How can I collaborate with you?',
 					acceptedAnswer: {
-						"@type": "Answer",
-						text: "You can reach out to me via email. I’m open to collaboration on projects or ideas. Feel free to contact me through: Email: contact@muhammadfiaz.com. For more details, you can check my contact information on my GitHub page."
+						'@type': 'Answer',
+						text: 'You can reach out to me via email. I’m open to collaboration on projects or ideas. Feel free to contact me through: Email: contact@muhammadfiaz.com. For more details, you can check my contact information on my GitHub page.'
 					}
 				},
 				{
-					"@type": "Question",
-					name: "Do you work on open-source projects?",
+					'@type': 'Question',
+					name: 'Do you work on open-source projects?',
 					acceptedAnswer: {
-						"@type": "Answer",
-						text: "Yes, I contribute to open-source projects! You can explore my repositories and ongoing contributions on my GitHub. Feel free to contribute or check out my work! Visit my GitHub page for more."
+						'@type': 'Answer',
+						text: 'Yes, I contribute to open-source projects! You can explore my repositories and ongoing contributions on my GitHub. Feel free to contribute or check out my work! Visit my GitHub page for more.'
 					}
 				},
 				{
-					"@type": "Question",
-					name: "What is your approach to new technologies?",
+					'@type': 'Question',
+					name: 'What is your approach to new technologies?',
 					acceptedAnswer: {
-						"@type": "Answer",
+						'@type': 'Answer',
 						text: "I'm always excited to learn new technologies! I typically start by building small projects to understand the fundamentals before diving deeper. I focus on adopting tools that improve my workflow and help me build better applications. For more about my tech journey, visit my GitHub page."
 					}
 				},
 				{
-					"@type": "Question",
-					name: "How can I support your work?",
+					'@type': 'Question',
+					name: 'How can I support your work?',
 					acceptedAnswer: {
-						"@type": "Answer",
-						text: "You can support me by starring my repositories, contributing to open-source projects, or simply following my work on GitHub. Sharing your feedback or spreading the word also helps! Additionally, you can support me directly through Ko-fi or GitHub Sponsors. Visit my GitHub page to get started."
+						'@type': 'Answer',
+						text: 'You can support me by starring my repositories, contributing to open-source projects, or simply following my work on GitHub. Sharing your feedback or spreading the word also helps! Additionally, you can support me directly through Ko-fi or GitHub Sponsors. Visit my GitHub page to get started.'
 					}
 				},
 				{
-					"@type": "Question",
-					name: "Do you offer freelance services?",
+					'@type': 'Question',
+					name: 'Do you offer freelance services?',
 					acceptedAnswer: {
-						"@type": "Answer",
-						text: "Yes, I am available for freelance work. Please contact me via email to discuss your project details. I would be happy to explore how we can collaborate! You can reach me through the contact information provided on my GitHub page."
+						'@type': 'Answer',
+						text: 'Yes, I am available for freelance work. Please contact me via email to discuss your project details. I would be happy to explore how we can collaborate! You can reach me through the contact information provided on my GitHub page.'
 					}
 				},
 				{
-					"@type": "Question",
+					'@type': 'Question',
 					name: "I tried to contact you but haven't received a response, what happened?",
 					acceptedAnswer: {
-						"@type": "Answer",
-						text: "I apologize if I missed your message or if I was slow to respond. Sometimes, messages get overlooked, or I may be caught up with other tasks. If I missed your message by mistake, please feel free to reach out again. To get a faster response, you can also create a notice through a GitHub Discussion or open an issue on my GitHub repository. I try to keep track of discussions and issues more actively."
+						'@type': 'Answer',
+						text: 'I apologize if I missed your message or if I was slow to respond. Sometimes, messages get overlooked, or I may be caught up with other tasks. If I missed your message by mistake, please feel free to reach out again. To get a faster response, you can also create a notice through a GitHub Discussion or open an issue on my GitHub repository. I try to keep track of discussions and issues more actively.'
 					}
 				}
 			]
