@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import { projects } from './projects';
+
+---
+
+<BaseLayout
+	title="All My Projects"
+	description="All my project portfolio from real projects to open source projects."
+>
+  <div class='container'>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold mb-2">All My Projects</h1>
+      <p class="text-zinc-700 dark:text-zinc-300 text-lg">All my project portfolio from real projects to open source projects.</p>
+      <div class="flex justify-center">
+        <input
+          id="project-search"
+          type="text"
+          placeholder="Search projects..."
+          class="mt-4 w-full max-w-md px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
+          oninput="window.filterProjects && window.filterProjects()"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <div id="projects-list">
+      {projects.length === 0 ? (
+        <div class="text-gray-500 text-lg py-8 text-center">No projects found.</div>
+      ) : (
+        <ProjectList projects={projects}/>
+      )}
+    </div>
+    <script is:inline type="module">
+      window.filterProjects = function() {
+        const input = document.getElementById('project-search');
+        const filter = input.value.toLowerCase();
+        const allProjects = [...document.querySelectorAll('#projects-list > div > div')];
+        let anyVisible = false;
+        allProjects.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(filter)) {
+            card.style.display = '';
+            anyVisible = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        const emptyMsg = document.querySelector('#projects-list .text-gray-500');
+        if (emptyMsg) emptyMsg.style.display = anyVisible ? 'none' : '';
+      };
+    </script>
+  </div>
+</BaseLayout>

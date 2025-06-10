@@ -1,0 +1,112 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { projects } from './projects/projects';
+import ProjectList from '../components/ProjectList.astro'
+import Experience from '../components/Experience.astro';
+// import RecentPosts from '../layouts/components/RecentPosts.astro';
+
+
+const top6Projects = projects.slice(0, 6);
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<div class='container'>
+		<div class='w-full md:flex md:items-center gap-16 mb-10 h-screen relative'>
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+80px)] flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 w-full px-4 max-w-full md:max-w-none">
+        {/* Mobile: Image above text, larger; Desktop: Image right of text */}
+        <div class="flex flex-col-reverse md:flex-row items-center md:items-center w-full md:w-auto gap-16 md:gap-[36rem] justify-center">
+          <div class="text-pretty leading-9 max-w-xs sm:max-w-md md:max-w-lg w-full flex flex-col items-start text-left">
+            <span class="text-2xl sm:text-3xl font-bold mb-2 block">Hello, I'm</span>
+            <h2 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 whitespace-nowrap break-keep max-w-full ">Muhammad Fiaz</h2>
+            <div class="text-base sm:text-lg min-h-[2.5em] flex items-center justify-start w-full">
+              <span id="typing-animation" class="whitespace-nowrap font-mono block w-[17ch] max-w-full"></span>
+            </div>
+						<div class="flex flex-col sm:flex-row gap-4 mt-6 w-full sm:w-auto">
+							<a href="mailto:contact@muhammadfiaz.com"
+								 class="px-6 py-2 rounded-lg border-2 border-green-800 bg-green-100 text-green-900 font-semibold shadow-none hover:bg-green-600 hover:text-white focus:bg-green-700 focus:text-white focus:animate-pulse transition-colors text-center w-full sm:w-auto">
+								Contact with Me
+							</a>
+							<a href="https://pay.muhammadfiaz.com" target="_blank" rel="noopener"
+								 class="px-6 py-2 rounded-lg border-2 border-yellow-700 bg-yellow-100 text-yellow-900 font-semibold shadow-none hover:bg-yellow-500 hover:text-white focus:bg-yellow-700 focus:text-white focus:animate-pulse transition-colors text-center w-full sm:w-auto">
+								Buy me a Coffee
+							</a>
+						</div>
+          </div>
+          <div class="relative inline-block w-52 h-52 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] mb-12 md:mb-0 md:-translate-x-8">
+            <Image src="https://avatars.githubusercontent.com/u/75434191?v=4" alt="Muhammad Fiaz" width={260} height={260} class="rounded-3xl rotate-3 flex-shrink-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105 hover:shadow-2xl relative z-20 border-4 border-blue-500 animate-anime-frame" loading="eager" fetchpriority="high" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-10">
+      <Experience />
+    </div>
+    <main>
+			<!--      <RecentPosts/> -->
+						<section class="min-h-screen flex flex-col justify-center">
+							<div class="mb-8">
+								<h2 class="text-3xl font-bold mb-2">My Projects</h2>
+								<p class="text-zinc-700 dark:text-zinc-300 text-lg">A selection of my real-world and open source projects.</p>
+							</div>
+							<div class="flex justify-between gap-2 mb-1">
+								<h3 class="text-lg font-bold mb-3">My Projects</h3>
+								<a href="/projects/" class="inline-block py-2 underline dark:prose-invert">All projects &raquo;</a>
+							</div>
+							{top6Projects.length === 0 ? (
+								<div class="text-gray-500 text-lg py-8 text-center">No projects found.</div>
+							) : (
+								<ProjectList projects={top6Projects}/>
+							)}
+						</section>
+					</main>
+				</div>
+			</BaseLayout>
+			<script is:inline>
+				const text = "I am a Full Stack Developer";
+				const el = document.getElementById("typing-animation");
+				let i = 0;
+				let forward = true;
+				let delay = 80;
+				function typeLoop() {
+					if (!el) return;
+					if (forward) {
+						el.textContent = text.slice(0, i);
+						if (i < text.length) {
+							i++;
+							setTimeout(typeLoop, delay);
+						} else {
+							forward = false;
+							setTimeout(typeLoop, 1200);
+						}
+					} else {
+						el.textContent = text.slice(0, i);
+						if (i > 0) {
+							i--;
+							setTimeout(typeLoop, 40);
+						} else {
+							forward = true;
+							setTimeout(typeLoop, 400);
+						}
+					}
+				}
+				typeLoop();
+			</script>
+
+			<style>
+			@keyframes pulse-bg {
+				0%, 100% { background-color: transparent; }
+				50% { background-color: inherit; }
+			}
+			.focus\:animate-pulse:focus {
+				animation: pulse-bg 0.8s cubic-bezier(0.4, 0, 0.6, 1) 1;
+			}
+			@keyframes anime-frame {
+				0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5), 0 0 0 0 rgba(14, 165, 233, 0.4); border-color: #3b82f6; }
+				50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.25), 0 0 0 16px rgba(14, 165, 233, 0.15); border-color: #0ea5e9; }
+			}
+			.animate-anime-frame {
+				animation: anime-frame 2.2s ease-in-out infinite;
+			}
+			</style>

@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseLayout from '@src/layouts/BaseLayout.astro';
+import { slugify, unslugify } from '@src/utils';
+import PostsByYear from '@src/components/PostsByYear.astro';
+
+type BlogPost = CollectionEntry<'blog'>;
+export const getStaticPaths = async () => {
+	const allPosts: BlogPost[] = await getCollection('blog');
+	return [
+		...new Set(
+			allPosts
+				.map((post) => post.data.tags)
+				.flat()
+				.filter((tag) => !!tag)
+		)
+	].map((tag) => ({ params: { tag: slugify(tag || '') } }));
+};
+
+const { tag } = Astro.params;
+const allPosts: BlogPost[] = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const taggedPosts = allPosts.filter((post) => post.data.tags?.map((tag) => slugify(tag)).includes(tag || ''));
+const title = `All Posts Tagged with ${unslugify(tag || '')}`;
+const description = `All Posts Tagged with ${unslugify(tag || '')}`;
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+>
+  <div class='container'>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+    </div>
+    {taggedPosts.length === 0 ? (
+      <div class="text-gray-500 text-lg py-8 text-center">No posts found for this tag.</div>
+    ) : (
+      <PostsByYear posts={taggedPosts}/>
+    )}
+  </div>
+</BaseLayout>

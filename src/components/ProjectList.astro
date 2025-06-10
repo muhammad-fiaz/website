@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../pages/projects/projects'
+import { kFormatter } from '../utils'
+import GithubWhite from '@src/assets/img/github-mark-white.svg';
+import GithubBlack from '@src/assets/img/github-mark.svg';
+
+const { projects } = Astro.props
+
+---
+<div class="grid grid-cols-12 gap-5">
+  {
+    projects.map((project: Project, idx: number) => {
+      const tags = project.tags || [];
+      return (
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 transition-all duration-300" id={`project-card-${idx}`}> 
+          <script is:inline type="module">
+            window.toggleTags = window.toggleTags || function(idx) {
+              const el = document.getElementById(`expanded-tags-${idx}`);
+              if (el) el.classList.toggle('hidden');
+              const btn = document.getElementById(`show-less-btn-${idx}`);
+              if (btn) btn.classList.toggle('hidden');
+            };
+            window.toggleDesc = window.toggleDesc || function(idx) {
+              const el = document.getElementById(`desc-expanded-${idx}`);
+              if (el) {
+                el.classList.toggle('line-clamp-none');
+                el.classList.toggle('line-clamp-2');
+              }
+              const btn = document.getElementById(`desc-toggle-btn-${idx}`);
+              if (btn) btn.innerText = btn.innerText === 'Show more' ? 'Show less' : 'Show more';
+            };
+          </script>
+          <div class="flex items-center justify-between my-2">
+            <h3 class="font-semibold">
+              <a class="underline" href={project.demoLink} target="_blank" rel={project.demoLinkRel}>{project.name}</a>
+            </h3>
+            {(project.stargazers_count !== undefined || project.forks_count !== undefined) && (
+              <div class="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+                {project.stargazers_count !== undefined && (
+                  <span class="flex items-center gap-1">
+                    <Image src={GithubBlack} height={12} class="dark:hidden" alt="Stars" />
+                    <Image src={GithubWhite} height={12} class="hidden dark:block" alt="Stars" />
+                    {kFormatter(project.stargazers_count)}
+                  </span>
+                )}
+                {project.forks_count !== undefined && (
+                  <span class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 3v12a3 3 0 0 0 3 3h6"/><circle cx="6" cy="3" r="3"/><circle cx="18" cy="18" r="3"/></svg>
+                    {kFormatter(project.forks_count)}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+          <div class="flex flex-wrap gap-2 w-full mb-2">
+            {tags.slice(0, 3).map((tag: string) => (
+              <span
+                class='border border-zinc-300 dark:border-zinc-700 rounded-2xl text-sm text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5 transition-all duration-700 hover:border-zinc-700 dark:hover:border-zinc-300'
+              >
+                {tag}
+              </span>
+            ))}
+            {tags.length > 3 && (
+              <span class="border border-zinc-300 dark:border-zinc-700 rounded-2xl text-sm text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5 bg-zinc-50 dark:bg-zinc-800 cursor-pointer select-none" title={tags.slice(3).join(', ')}>
+                +{tags.length - 3} more
+              </span>
+            )}
+          </div>
+          <div class="text-zinc-600 dark:text-zinc-300 mb-4 min-h-[50px] transition-all duration-300">
+            <p>{project.description}</p>
+          </div>
+          <div class="flex justify-end gap-3 mt-4">
+            {
+              project.postLink &&
+              <a class="underline flex items-center gap-2" href={project.postLink}>
+                Article
+              </a>
+            }
+            {
+              project.demoLink &&
+              <a class="underline flex items-center gap-2" href={project.demoLink} target="_blank" rel={project.demoLinkRel}>
+                Demo
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              </a>
+            }
+          </div>
+        </div>
+      )
+    })
+  }
+</div>

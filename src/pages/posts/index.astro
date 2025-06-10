@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostsByYear from '../../components/PostsByYear.astro';
+
+type BlogPost = CollectionEntry<'blog'>;
+const title = 'All posts'
+const description = 'Articles, guides, tutorials and more.';
+
+const posts = (await getCollection('blog')).sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+>
+  <div class='container'>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+      <p class="text-zinc-700 dark:text-zinc-300 text-lg">{description}</p>
+    </div>
+    <div class="flex justify-center">
+      <input
+        id="post-search"
+        type="text"
+        placeholder="Search posts..."
+        class="mt-4 w-full max-w-md px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
+        oninput="window.filterPosts && window.filterPosts()"
+        autocomplete="off"
+      />
+    </div>
+    <div id="posts-list">
+      {posts.length === 0 ? (
+        <div class="text-gray-500 text-lg py-8 text-center">No posts found.</div>
+      ) : (
+        <PostsByYear posts={posts}/>
+      )}
+    </div>
+    <script is:inline type="module">
+      window.filterPosts = function() {
+        const input = document.getElementById('post-search');
+        const filter = input.value.toLowerCase();
+        const allPosts = [...document.querySelectorAll('#posts-list > div > div')];
+        let anyVisible = false;
+        allPosts.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(filter)) {
+            card.style.display = '';
+            anyVisible = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        const emptyMsg = document.querySelector('#posts-list .text-gray-500');
+        if (emptyMsg) emptyMsg.style.display = anyVisible ? 'none' : '';
+      };
+    </script>
+  </div>
+</BaseLayout>
