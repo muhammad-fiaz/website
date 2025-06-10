@@ -1,6 +1,4 @@
 ---
-// QNA.astro: Accessible, responsive FAQ/Q&A section for Astro + Tailwind
-// No props needed; data is local
 const faqData = [
 	{
 		title: 'Who are you?',
@@ -41,12 +39,12 @@ const faqData = [
 ];
 ---
 
-<section class='max-w-2xl mx-auto my-12 px-4'>
-	<h2 class='text-3xl font-bold mb-2 text-center'>Q&amp;A / Frequently Asked Questions</h2>
-	<p class='text-center text-gray-600 dark:text-gray-300 mb-8'>
+<section class='max-w-2xl mx-auto my-8 sm:my-12 px-2 sm:px-4'>
+	<h2 class='text-2xl sm:text-3xl font-bold mb-2 text-center'>Q&amp;A / Frequently Asked Questions</h2>
+	<p class='text-center text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 text-sm sm:text-base'>
 		Find answers to common questions about my work, skills, and how to connect or collaborate with me.
 	</p>
-	<div class='space-y-4'>
+	<div class='space-y-3 sm:space-y-4'>
 		{
 			faqData.map((faq, idx) => (
 				<details
@@ -56,7 +54,7 @@ const faqData = [
 				>
 					<summary
 						id={`faq-title-${idx}`}
-						class='cursor-pointer select-none outline-none px-6 py-4 font-semibold text-lg flex items-center justify-between transition-colors rounded-lg text-gray-900 dark:text-white bg-white dark:bg-neutral-900'
+						class='cursor-pointer select-none outline-none px-4 sm:px-6 py-3 sm:py-4 font-semibold text-base sm:text-lg flex items-center justify-between transition-colors rounded-lg text-gray-900 dark:text-white bg-white dark:bg-neutral-900'
 					>
 						<span>{faq.title}</span>
 						<svg
@@ -70,7 +68,7 @@ const faqData = [
 						</svg>
 					</summary>
 					<div
-						class='px-6 pb-4 pt-2 text-gray-700 dark:text-gray-200 prose prose-sm max-w-none bg-white dark:bg-neutral-900'
+						class='px-4 sm:px-6 pb-3 sm:pb-4 pt-2 text-gray-700 dark:text-gray-200 prose prose-sm max-w-none bg-white dark:bg-neutral-900'
 						set:html={faq.content}
 					/>
 				</details>

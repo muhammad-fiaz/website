@@ -27,7 +27,7 @@ function buildToc(headings: any) {
 			toc.map((heading: any) => (
 				<li>
 					<a
-						class='block font-bold py-1.5 px-3 border-l border-transparent text-inherit leading-tight text-zinc-700 dark:text-zinc-300'
+						class='block font-bold py-1.5 px-3 border-l border-transparent leading-tight text-zinc-700 dark:text-zinc-300'
 						href={'#' + heading.slug}
 					>
 						{heading.text}
@@ -37,7 +37,7 @@ function buildToc(headings: any) {
 							{heading.subheadings.map((subheading: any) => (
 								<li>
 									<a
-										class='block py-1.5 pl-6 pr-3 border-l border-transparent text-inherit leading-tight text-zinc-700 dark:text-zinc-300'
+										class='block py-1.5 pl-6 pr-3 border-l border-transparent leading-tight text-zinc-700 dark:text-zinc-300'
 										href={'#' + subheading.slug}
 									>
 										{subheading.text}
