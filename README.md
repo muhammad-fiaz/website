@@ -19,11 +19,62 @@ If you encounter any bugs, have questions, or want to suggest new features, plea
 
 ## Getting Started
 
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or newer recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js) or [pnpm](https://pnpm.io/) or [yarn](https://yarnpkg.com/)
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```sh
+   git clone https://github.com/muhammad-fiaz/website.git
+   cd website
+   ```
+
+2. **Install dependencies:**
+
+   ```sh
+   npm install
+   # or
+   pnpm install
+   # or
+   yarn install
+   # or
+   bun install
+   ```
+
 ### Scripts
 
 - `npm run dev` / `npm start` - Start the development server.
 - `npm run build` - Type-check and build the project for production.
 - `npm run preview` - Preview the built site locally.
+- `npm run format` - Format all the Code
+
+### Bun
+
+You can also use [Bun](https://bun.sh/) as an alternative JavaScript runtime and package manager:
+
+1. **Install Bun:**
+   [Follow the official Bun installation guide](https://bun.sh/docs/install) for your OS.
+
+2. **Install dependencies with Bun:**
+
+   ```sh
+   bun install
+   ```
+
+3. **Run the development server with Bun:**
+
+   ```sh
+   bun run dev
+   ```
+
+4. **Other scripts:**
+   - `bun run build` - Build the project for production
+   - `bun run preview` - Preview the built site locally
+   - `bun run format` - Format all the code
 
 ### Dependencies
 
