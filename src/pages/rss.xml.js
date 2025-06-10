@@ -11,7 +11,7 @@ export async function GET(context) {
 		items: posts.map((post) => ({
 			...post.data,
 			link: `/${post.slug ?? post.id ?? ''}/`,
-			guid: `https://muhammadfiaz.com/${post.slug ?? post.id ?? ''}/`,
-		})),
+			guid: `https://muhammadfiaz.com/${post.slug ?? post.id ?? ''}/`
+		}))
 	});
 }

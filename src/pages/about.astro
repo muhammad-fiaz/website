@@ -3,32 +3,45 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-	title="About Me"
-	description="About Muhammad Fiaz - Full Stack Developer, AI/ML Enthusiast, Open Source Contributor"
->
-  <div class='container'>
-    <main class='prose text-lg dark:prose-invert'>
-      <article>
-        <div class="flex flex-col md:flex-row gap-6 items-center mb-2">
-          <Image src="https://avatars.githubusercontent.com/u/75434191?v=4" alt="Muhammad Fiaz" width={160} height={160} class="rounded-full border-4 border-primary shadow-lg" />
-          <div>
-            <h1 class="text-3xl font-bold mb-2">A Brief Introduction: Who Am I?</h1>
-            <p>
-              I've been passionate about coding since I was a child. I fell in love with programming at a young age, spending countless hours learning, experimenting, and creating small projects. Over the years, this passion has grown into a career as a <strong>Full Stack developer</strong>, where I continue to build innovative solutions that solve real-world problems.
-            </p>
-            <p>
-              As I’ve evolved in my career, I’ve expanded my expertise into new areas like <strong>Machine Learning (ML)</strong> and <strong>Artificial Intelligence (AI)</strong>, diving deep into neural networks and other cutting-edge technologies. But no matter how much I learn, I always keep that same excitement and curiosity I had as a child, exploring new fields and technologies that push the boundaries of what’s possible.
-            </p>
-            <p>
-              Today, I’m not just focused on building apps and websites; I’m also exploring <strong>DevOps tools</strong> like Docker, Kubernetes, and AWS to optimize and scale my projects. I believe in continuous learning and growth, and I’m always looking for new challenges that help me expand my skills.
-            </p>
-            <p>
-              If you’re interested in collaborating on something exciting or need help with a project, feel free to reach out. Let’s create something amazing together!
-            </p>
-          </div>
-        </div>
-      </article>
-    </main>
-  </div>
+<BaseLayout title='About Me' description='About Muhammad Fiaz - Full Stack Developer, AI/ML Enthusiast, Open Source Contributor'>
+	<div class='container'>
+		<main class='prose text-lg dark:prose-invert'>
+			<article>
+				<div class='flex flex-col md:flex-row gap-6 items-center mb-2'>
+					<Image
+						src='https://avatars.githubusercontent.com/u/75434191?v=4'
+						alt='Muhammad Fiaz'
+						width={160}
+						height={160}
+						class='rounded-full border-4 border-primary shadow-lg'
+					/>
+					<div>
+						<h1 class='text-3xl font-bold mb-2'>A Brief Introduction: Who Am I?</h1>
+						<p>
+							I've been passionate about coding since I was a child. I fell in love with programming at a young age, spending countless
+							hours learning, experimenting, and creating small projects. Over the years, this passion has grown into a career as a <strong
+								>Full Stack developer</strong
+							>, where I continue to build innovative solutions that solve real-world problems.
+						</p>
+						<p>
+							As I’ve evolved in my career, I’ve expanded my expertise into new areas like <strong>Machine Learning (ML)</strong> and <strong
+								>Artificial Intelligence (AI)</strong
+							>, diving deep into neural networks and other cutting-edge technologies. But no matter how much I learn, I always keep that
+							same excitement and curiosity I had as a child, exploring new fields and technologies that push the boundaries of what’s
+							possible.
+						</p>
+						<p>
+							Today, I’m not just focused on building apps and websites; I’m also exploring <strong>DevOps tools</strong> like Docker, Kubernetes,
+							and AWS to optimize and scale my projects. I believe in continuous learning and growth, and I’m always looking for new challenges
+							that help me expand my skills.
+						</p>
+						<p>
+							If you’re interested in collaborating on something exciting or need help with a project, feel free to reach out. Let’s create
+							something amazing together!
+						</p>
+					</div>
+				</div>
+			</article>
+		</main>
+	</div>
 </BaseLayout>

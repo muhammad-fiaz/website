@@ -1,0 +1,80 @@
+---
+// QNA.astro: Accessible, responsive FAQ/Q&A section for Astro + Tailwind
+// No props needed; data is local
+const faqData = [
+	{
+		title: 'Who are you?',
+		content: `Hey there! 👋 I'm Muhammad Fiaz, a Full Stack developer passionate about coding since childhood. I build innovative solutions using a variety of technologies like Next.js, Node.js, Python, TypeScript, Go, Rust, Flutter, and GenAI. I'm also diving into MLOps and always eager to learn new tools and techniques.<br><br>For more about me, check out my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub</a>!`
+	},
+	{
+		title: 'What technologies do you use?',
+		content: `I am a full-stack developer with a focus on both frontend and backend technologies. I mostly use tools like Next.js, TypeScript, Node.js, Python (Django, Flask, FastAPI), MongoDB, and SQL for my regular basis projects. I am also diving into Generative AI, Machine Learning, and Data Science to build smarter, data-driven full-stack applications.<br><br>For more details on my tech stack and projects, please check out my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub page</a>.`
+	},
+	{
+		title: 'Can we hire you?',
+		content: `Yes, I am currently looking for job opportunities! Feel free to reach out to me via email or LinkedIn if you're interested in hiring me or collaborating on exciting projects.<br><br>You can contact me through:<ul class="list-disc pl-6 text-black dark:text-white text-sm"><li>Email: <a href="mailto:contact@muhammadfiaz.com" class="text-blue-500 hover:underline">contact@muhammadfiaz.com</a></li><li>LinkedIn: <a href="https://www.linkedin.com/in/muhammad-fiaz-/" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">muhammad-fiaz-</a></li></ul>`
+	},
+	{
+		title: 'How can I collaborate with you?',
+		content: `You can reach out to me via email. I’m open to collaboration on projects or ideas. Feel free to contact me through:<ul class="list-disc pl-6 text-black dark:text-white text-sm"><li>Email: <a href="mailto:contact@muhammadfiaz.com" class="text-blue-500 hover:underline">contact@muhammadfiaz.com</a></li></ul><br>For more details, you can check my contact information on my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub page</a>.`
+	},
+	{
+		title: 'Do you work on open-source projects?',
+		content: `Yes, I contribute to open-source projects! You can explore my repositories and ongoing contributions on my GitHub. Feel free to contribute or check out my work!<br><br>Visit my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub page</a> for more.`
+	},
+	{
+		title: 'What is your approach to new technologies?',
+		content: `I'm always excited to learn new technologies! I typically start by building small projects to understand the fundamentals before diving deeper. I focus on adopting tools that improve my workflow and help me build better applications.<br><br>For more about my tech journey, visit my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub page</a>.`
+	},
+	{
+		title: 'How can I support your work?',
+		content: `You can support me by starring my repositories, contributing to open-source projects, or simply following my work on GitHub. Sharing your feedback or spreading the word also helps!<br><br>Additionally, you can support me directly through:<ul class="list-disc pl-6 text-black dark:text-white text-sm"><li><a href="https://ko-fi.com/muhammadfiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Ko-fi</a> – Buy me a coffee and support my work!</li><li><a href="https://github.com/sponsors/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub Sponsors</a> – Sponsor me on GitHub to show your support!</li></ul><br>Visit my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub page</a> to get started.`
+	},
+	{
+		title: 'Do you offer freelance services?',
+		content: `Yes, I am available for freelance work. Please contact me <a href="mailto:contact@muhammadfiaz.com" class="text-blue-500 hover:underline">via email</a> to discuss your project details. I would be happy to explore how we can collaborate!<br><br>You can reach me through the contact information provided on my <a href="https://github.com/muhammad-fiaz" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub page</a>.`
+	},
+	{
+		title: "I tried to contact you but haven't received a response, what happened?",
+		content: `I apologize if I missed your message or if I was slow to respond. Sometimes, messages get overlooked, or I may be caught up with other tasks. If I missed your message by mistake, please feel free to reach out again.<br><br>To get a faster response, you can also create a notice through a <a href="https://github.com/muhammad-fiaz/muhammad-fiaz/discussions" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub Discussion</a> or open an issue on my <a href="https://github.com/muhammad-fiaz/muhammad-fiaz/issues" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub repository</a>. I try to keep track of discussions and issues more actively.`
+	}
+];
+---
+
+<section class='max-w-2xl mx-auto my-12 px-4'>
+	<h2 class='text-3xl font-bold mb-2 text-center'>Q&amp;A / Frequently Asked Questions</h2>
+	<p class='text-center text-gray-600 dark:text-gray-300 mb-8'>
+		Find answers to common questions about my work, skills, and how to connect or collaborate with me.
+	</p>
+	<div class='space-y-4'>
+		{
+			faqData.map((faq, idx) => (
+				<details
+					class='group rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-900 shadow-lg transition-all focus-within:ring-2 focus-within:ring-black dark:focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-neutral-900'
+					tabindex='0'
+					aria-labelledby={`faq-title-${idx}`}
+				>
+					<summary
+						id={`faq-title-${idx}`}
+						class='cursor-pointer select-none outline-none px-6 py-4 font-semibold text-lg flex items-center justify-between transition-colors rounded-lg text-gray-900 dark:text-white bg-white dark:bg-neutral-900'
+					>
+						<span>{faq.title}</span>
+						<svg
+							class='ml-2 w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform'
+							fill='none'
+							stroke='currentColor'
+							stroke-width='2'
+							viewBox='0 0 24 24'
+						>
+							<path stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7' />
+						</svg>
+					</summary>
+					<div
+						class='px-6 pb-4 pt-2 text-gray-700 dark:text-gray-200 prose prose-sm max-w-none bg-white dark:bg-neutral-900'
+						set:html={faq.content}
+					/>
+				</details>
+			))
+		}
+	</div>
+</section>

@@ -1,30 +1,31 @@
 ---
-
 import PostItem from '../../components/PostItem.astro';
 import type { CollectionEntry } from 'astro:content';
 type BlogPost = CollectionEntry<'blog'>;
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 5);
-
+const posts = (await getCollection('blog'))
+	.sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
 ---
+
 <section class='mt-6 mb-12 min-h-screen flex flex-col justify-center'>
-	<div class="mb-8">
-		<h2 class="text-3xl font-bold mb-2">Recent Posts</h2>
-		<p class="text-zinc-700 dark:text-zinc-300 text-lg">Latest articles, guides, and tutorials about front-end development and more.</p>
+	<div class='mb-8'>
+		<h2 class='text-3xl font-bold mb-2'>Recent Posts</h2>
+		<p class='text-zinc-700 dark:text-zinc-300 text-lg'>Latest articles, guides, and tutorials about front-end development and more.</p>
 	</div>
-	<div class="flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700">
-		<h3 class="text-lg font-bold mb-3">Recent Posts</h3>
-		<a href="/posts/" class="inline-block py-2 underline dark:prose-invert">All posts &raquo;</a>
+	<div class='flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700'>
+		<h3 class='text-lg font-bold mb-3'>Recent Posts</h3>
+		<a href='/posts/' class='inline-block py-2 underline dark:prose-invert'>All posts &raquo;</a>
 	</div>
 	<div>
-		{posts.length === 0 ? (
-			<div class="text-zinc-600 dark:text-zinc-300 text-lg py-8 text-center">No posts found.</div>
-		) : (
-			posts.map((post: BlogPost) => (
-				<PostItem post={post} />
-			))
-		)}
+		{
+			posts.length === 0 ? (
+				<div class='text-zinc-600 dark:text-zinc-300 text-lg py-8 text-center'>No posts found.</div>
+			) : (
+				posts.map((post: BlogPost) => <PostItem post={post} />)
+			)
+		}
 	</div>
-	<div class="text-right"></div>
+	<div class='text-right'></div>
 </section>

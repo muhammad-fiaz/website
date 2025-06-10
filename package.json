@@ -1,41 +1,44 @@
 {
-  "name": "portfolio",
-  "type": "module",
-  "version": "3.0.0",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/markdown-remark": "^6.3.2",
-    "@astrojs/mdx": "^4.3.0",
-    "@astrojs/partytown": "^2.1.4",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.1",
-    "@tailwindcss/vite": "^4.1.8",
-    "astro": "^5.9.2",
-    "sharp": "^0.34.2",
-    "tailwindcss": "^4.1.8",
-    "typescript": "^5.8.3",
-    "unist-util-visit": "^5.0.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/typography": "^0.5.16",
-    "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.1",
-    "vite": "^6.3.5"
-  },
-  "homepage": "https://muhammadfiaz.com",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/muhammad-fiaz/website.git"
-  },
-  "bugs": {
-    "url": "https://github.com/muhammad-fiaz/website/issues"
-  }
+	"name": "portfolio",
+	"type": "module",
+	"version": "3.0.0",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"format": "prettier --write .",
+		"format:check": "prettier --check ."
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/markdown-remark": "^6.3.2",
+		"@astrojs/mdx": "^4.3.0",
+		"@astrojs/partytown": "^2.1.4",
+		"@astrojs/rss": "^4.0.12",
+		"@astrojs/sitemap": "^3.4.1",
+		"@tailwindcss/vite": "^4.1.8",
+		"astro": "^5.9.2",
+		"astro-robots-txt": "^1.0.0",
+		"sharp": "^0.34.2",
+		"tailwindcss": "^4.1.8",
+		"typescript": "^5.8.3",
+		"unist-util-visit": "^5.0.0"
+	},
+	"devDependencies": {
+		"@tailwindcss/forms": "^0.5.10",
+		"@tailwindcss/typography": "^0.5.16",
+		"prettier": "^3.5.3",
+		"prettier-plugin-astro": "^0.14.1",
+		"vite": "^6.3.5"
+	},
+	"homepage": "https://muhammadfiaz.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/muhammad-fiaz/website.git"
+	},
+	"bugs": {
+		"url": "https://github.com/muhammad-fiaz/website/issues"
+	}
 }

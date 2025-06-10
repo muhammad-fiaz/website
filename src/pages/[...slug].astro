@@ -10,7 +10,11 @@ import { slugify } from '../utils';
 import { loadEnv } from 'vite';
 import { render } from 'astro:content';
 
-const { GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
+const { GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID } = loadEnv(
+	process.env.NODE_ENV || 'production',
+	process.cwd(),
+	''
+);
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -29,70 +33,83 @@ const { Content, headings } = await render(post);
 
 <BaseLayout title={seoTitle || title} description={description} image={coverImage?.src || undefined}>
 	<div class='container lg:flex gap-10'>
-		<main
-			class='overflow-hidden grow'
-		>
+		<main class='overflow-hidden grow'>
 			<article>
 				<Prose>
 					<div>
 						<h1 class='my-1! leading-tight'>{title}</h1>
-            <div class='text-sm font-medium mt-2 sm:mt-0 py-1 md:text-right flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center'>
-              {
-                <div class='flex gap-2'>
-                  {
-                    (tags || [] )?.map((tag: string) => (
-                      <a
-                        class='border border-zinc-300 dark:border-zinc-700 rounded-2xl
+						<div
+							class='text-sm font-medium mt-2 sm:mt-0 py-1 md:text-right flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center'
+						>
+							{
+								(
+									<div class='flex gap-2'>
+										{(tags || [])?.map((tag: string) => (
+											<a
+												class='border border-zinc-300 dark:border-zinc-700 rounded-2xl
                           text-sm text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5
                           transition-all duration-700
                         hover:border-zinc-700 dark:hover:border-zinc-300'
-                        href={`/tags/${slugify(tag)}`}>
-                        {tag}
-                      </a>
-                    ))
-                  }
-                </div>
-              }
-              <div>
-                {
-                  updatedDate ?
-                    <>Updated on <strong><FormattedDate date={updatedDate} /></strong></>
-                  :
-                    <>Published on <strong><FormattedDate date={pubDate} /></strong></>
-                }
-              </div>
-            </div>
+												href={`/tags/${slugify(tag)}`}
+											>
+												{tag}
+											</a>
+										))}
+									</div>
+								)
+							}
+							<div>
+								{
+									updatedDate ? (
+										<>
+											Updated on{' '}
+											<strong>
+												<FormattedDate date={updatedDate} />
+											</strong>
+										</>
+									) : (
+										<>
+											Published on{' '}
+											<strong>
+												<FormattedDate date={pubDate} />
+											</strong>
+										</>
+									)
+								}
+							</div>
+						</div>
 					</div>
-          <div class='py-3 overflow-hidden'>
-            {coverImage && <Image class='rounded-3xl w-full m-0 lg:mb-2' src={coverImage} alt={title} loading='eager' />}
-          </div>
+					<div class='py-3 overflow-hidden'>
+						{coverImage && <Image class='rounded-3xl w-full m-0 lg:mb-2' src={coverImage} alt={title} loading='eager' />}
+					</div>
 					<Content />
 				</Prose>
-        {
-          GISCUS_REPO &&
-            <script
-              id='giscus-script'
-              is:inline
-              src='https://giscus.app/client.js'
-              data-repo={GISCUS_REPO}
-              data-repo-id={GISCUS_REPO_ID}
-              data-category={GISCUS_CATEGORY}
-              data-category-id={GISCUS_CATEGORY_ID}
-              data-mapping='pathname'
-              data-strict='0'
-              data-reactions-enabled='1'
-              data-emit-metadata='0'
-              data-input-position='bottom'
-              data-theme='preferred_color_scheme'
-              data-lang='en'
-              crossorigin='anonymous'
-              async></script>
-        }
-
+				{
+					GISCUS_REPO && (
+						<script
+							id='giscus-script'
+							is:inline
+							src='https://giscus.app/client.js'
+							data-repo={GISCUS_REPO}
+							data-repo-id={GISCUS_REPO_ID}
+							data-category={GISCUS_CATEGORY}
+							data-category-id={GISCUS_CATEGORY_ID}
+							data-mapping='pathname'
+							data-strict='0'
+							data-reactions-enabled='1'
+							data-emit-metadata='0'
+							data-input-position='bottom'
+							data-theme='preferred_color_scheme'
+							data-lang='en'
+							crossorigin='anonymous'
+							async
+						/>
+					)
+				}
 			</article>
 		</main>
-    <div class='shrink-0 w-[280px] hidden md:block'>
-      <div class='mb-4'>
+		<div class='shrink-0 w-[280px] hidden md:block'>
+			<div class='mb-4'>
 				<AboutTheAuthor />
 			</div>
 			<TableOfContent headings={headings} />
