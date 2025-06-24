@@ -1,12 +1,15 @@
 ---
+const title = 'All My Projects | Muhammad Fiaz';
+const description = 'All my project portfolio from real projects to open source projects by Muhammad Fiaz.';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectList from '../../components/ProjectList.astro';
 import { projects } from './projects';
+import { Schema } from 'astro-seo-schema';
 ---
 
-<BaseLayout title='All My Projects' description='All my project portfolio from real projects to open source projects.'>
+<BaseLayout title={title} description={description}>
 	<div class='container'>
-		<div class='mb-10'>
+		<div class='mb-10 text-center'>
 			<h1 class='text-3xl font-bold mb-2'>All My Projects</h1>
 			<p class='text-zinc-700 dark:text-zinc-300 text-lg'>All my project portfolio from real projects to open source projects.</p>
 			<div class='flex justify-center'>
@@ -49,4 +52,27 @@ import { projects } from './projects';
 			};
 		</script>
 	</div>
+	<Schema
+	  item={{
+	    '@context': 'https://schema.org',
+	    '@type': 'CollectionPage',
+	    name: title,
+	    description: description,
+	    url: 'https://muhammadfiaz.com/projects/',
+	    author: {
+	      '@type': 'Person',
+	      name: 'Muhammad Fiaz',
+	      url: 'https://muhammadfiaz.com/'
+	    },
+	    hasPart: projects.map((project) => ({
+	      '@type': 'CreativeWork',
+	      name: project.name,
+	      description: project.description,
+	      url: project.demoLink,
+	      keywords: project.tags?.join(', '),
+	      inLanguage: 'en',
+	      ...(project.githubUrl && { sameAs: [project.githubUrl] })
+	    }))
+	  }}
+	/>
 </BaseLayout>

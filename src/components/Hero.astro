@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   const splash = document.getElementById('splash-screen');
   if (splash) {
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver(() => {
       if (!document.getElementById('splash-screen')) {
         showHero();
         observer.disconnect();

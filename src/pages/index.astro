@@ -1,5 +1,6 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+const title = "Muhammad Fiaz | Full Stack Developer";
+const description = "Welcome to my portfolio! Discover my latest projects, skills, and professional journey as a full stack developer.";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Experience from '../components/Experience.astro';
 // import RecentPosts from '../layouts/components/RecentPosts.astro';
@@ -9,7 +10,7 @@ import Hero from '../components/Hero.astro';
 import TechStack from '@src/components/TechStack.astro';
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<BaseLayout title={title} description={description}>
 	<div class='container'>
 		<main>
 			<Hero />

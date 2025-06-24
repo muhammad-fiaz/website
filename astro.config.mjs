@@ -10,6 +10,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+	output: 'static',
 	site: 'https://muhammadfiaz.com',
 	integrations: [mdx(), sitemap(), partytown(), robotsTxt()],
 

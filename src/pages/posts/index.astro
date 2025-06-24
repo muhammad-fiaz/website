@@ -3,17 +3,35 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostsByYear from '../../components/PostsByYear.astro';
+import { Schema } from 'astro-seo-schema';
 
 type BlogPost = CollectionEntry<'blog'>;
-const title = 'All posts';
-const description = 'Articles, guides, tutorials and more.';
+const title = 'All Posts | Muhammad Fiaz';
+const description = 'Articles, guides, tutorials and more by Muhammad Fiaz.';
 
 const posts = (await getCollection('blog')).sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const blogPostParts = posts.map((post) => {
+  // Extract the slug from the post id (removes 'blog/' and file extension)
+  const slug = post.id.replace('blog/', '').replace(/\.mdx?$/, '');
+  const base: Record<string, any> = {
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    description: post.data.description,
+    url: `https://muhammadfiaz.com/posts/${slug}/`,
+    datePublished: post.data.pubDate,
+    inLanguage: 'en'
+  };
+  if (post.data.tags) {
+    base.keywords = post.data.tags.join(', ');
+  }
+  return base;
+}) as any[];
 ---
 
 <BaseLayout title={title} description={description}>
 	<div class='container'>
-		<div class='mb-10'>
+		<div class='mb-10 text-center'>
 			<h1 class='text-3xl font-bold mb-2'>{title}</h1>
 			<p class='text-zinc-700 dark:text-zinc-300 text-lg'>{description}</p>
 		</div>
@@ -49,5 +67,20 @@ const posts = (await getCollection('blog')).sort((a: BlogPost, b: BlogPost) => b
 				if (emptyMsg) emptyMsg.style.display = anyVisible ? 'none' : '';
 			};
 		</script>
+		<Schema
+		  item={{
+		    '@context': 'https://schema.org',
+		    '@type': 'CollectionPage',
+		    name: title,
+		    description: description,
+		    url: 'https://muhammadfiaz.com/posts/',
+		    author: {
+		      '@type': 'Person',
+		      name: 'Muhammad Fiaz',
+		      url: 'https://muhammadfiaz.com/'
+		    },
+		    hasPart: blogPostParts
+		  }}
+		/>
 	</div>
 </BaseLayout>

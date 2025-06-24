@@ -6,8 +6,8 @@ import loadingLaptop from '@src/assets/gif/loading-laptop.gif';
 </head>
 <div id="splash-screen" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-zinc-900 transition-opacity duration-500">
   <div class="text-center">
-    <img src={loadingLaptop.src ?? loadingLaptop} alt="Loading..." class="mx-auto mb-10 object-contain w-[440px] h-[440px]" width="440" height="440" />
-    <div class="text-3xl font-bold text-zinc-800 dark:text-zinc-100 flex items-center justify-center">
+    <img src={loadingLaptop.src ?? loadingLaptop} alt="Loading..." class="mx-auto mb-8 object-contain w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] md:w-[640px] md:h-[640px] max-w-[90vw] max-h-[60vh]" width="640" height="640" />
+    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-800 dark:text-zinc-100 flex items-center justify-center">
       <span>Loading</span>
       <span id="loading-dots" class="inline-block w-6 text-left">.</span>
     </div>
@@ -15,19 +15,20 @@ import loadingLaptop from '@src/assets/gif/loading-laptop.gif';
 </div>
 <script is:inline>
   // Animate the dots in Loading... (cycle through 1, 2, 3 dots, then back to 1)
-  window.addEventListener('DOMContentLoaded', function() {
+  window.addEventListener('load', function() {
     const dots = document.getElementById('loading-dots');
     let count = 1;
-    setInterval(() => {
+    const dotInterval = setInterval(() => {
       count = count < 3 ? count + 1 : 1;
       if (dots) dots.textContent = '.'.repeat(count);
-    }, 400);
-    setTimeout(function() {
-      const splash = document.getElementById('splash-screen');
-      if (splash) {
-        splash.style.opacity = '0';
-        setTimeout(() => splash.remove(), 500);
-      }
-    }, 600);
+    }, 200); // Faster dot animation
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.remove();
+        clearInterval(dotInterval);
+      }, 500);
+    }
   });
 </script>

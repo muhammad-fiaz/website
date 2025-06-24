@@ -13,7 +13,7 @@ const { projects } = Astro.props
     projects.map((project: Project, idx: number) => {
       const tags = project.tags || [];
       return (
-        <div class="col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 transition-all duration-300" id={`project-card-${idx}`}> 
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 transition-all duration-300 opacity-0 translate-y-8 animate-fade-in-up" id={`project-card-${idx}`}> 
           <script is:inline type="module">
             window.toggleTags = window.toggleTags || function(idx) {
               const el = document.getElementById(`expanded-tags-${idx}`);
@@ -90,3 +90,25 @@ const { projects } = Astro.props
     })
   }
 </div>
+<style>
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+</style>
+<script is:inline type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.animate-fade-in-up').forEach((el, i) => {
+      el.style.animationDelay = `${i * 80}ms`;
+    });
+  });
+</script>

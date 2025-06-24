@@ -1,11 +1,12 @@
 ---
+const title = "404 Page Not Found - Muhammad Fiaz";
+const description = "Sorry, the page you are looking for does not exist. Return to the homepage or explore more about Muhammad Fiaz, Full Stack Developer.";
 import { Image } from 'astro:assets';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NotFoundImage from '@src/assets/img/404-not-found.png';
 ---
 
-<BaseLayout title={'404 Page Not Found - ' + SITE_TITLE} description={SITE_DESCRIPTION + ' 404 Page Not Found'}>
+<BaseLayout title={title} description={description}>
 	<div class='container text-center'>
 		<Image width={300} class='my-8 mx-auto' src={NotFoundImage} alt='404 Page Not Found' />
 		<div class='p-4'>
