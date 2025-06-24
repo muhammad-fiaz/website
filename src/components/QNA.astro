@@ -39,22 +39,23 @@ const faqData = [
 ];
 ---
 
-<section class='max-w-2xl mx-auto my-8 sm:my-12 px-2 sm:px-4'>
-	<h2 class='text-2xl sm:text-3xl font-bold mb-2 text-center'>Q&amp;A / Frequently Asked Questions</h2>
-	<p class='text-center text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 text-sm sm:text-base'>
+<section class='max-w-2xl mx-auto my-8 sm:my-12 px-2 sm:px-4 lg:min-h-screen'>
+	<h2 class='text-2xl sm:text-3xl font-bold mb-2 text-center opacity-0 translate-y-8 will-change-transform transition-all duration-1000 ease-out animate-fade-in-up-on-view' id="faq-heading">Q&amp;A / Frequently Asked Questions</h2>
+	<p class='text-center text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 text-sm sm:text-base opacity-0 translate-y-8 will-change-transform transition-all duration-1000 ease-out animate-fade-in-up-on-view'>
 		Find answers to common questions about my work, skills, and how to connect or collaborate with me.
 	</p>
 	<div class='space-y-3 sm:space-y-4'>
 		{
 			faqData.map((faq, idx) => (
 				<details
-					class='group rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-900 shadow-lg transition-all focus-within:ring-2 focus-within:ring-black dark:focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-neutral-900'
+					class='group rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-900 shadow-lg transition-all focus-within:ring-2 focus-within:ring-black dark:focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-neutral-900 opacity-0 translate-y-8 will-change-transform duration-1000 ease-out animate-fade-in-up-on-view'
 					tabindex='0'
 					aria-labelledby={`faq-title-${idx}`}
 				>
 					<summary
 						id={`faq-title-${idx}`}
 						class='cursor-pointer select-none outline-none px-4 sm:px-6 py-3 sm:py-4 font-semibold text-base sm:text-lg flex items-center justify-between transition-colors rounded-lg text-gray-900 dark:text-white bg-white dark:bg-neutral-900'
+						aria-label={faq.title}
 					>
 						<span>{faq.title}</span>
 						<svg
@@ -63,7 +64,9 @@ const faqData = [
 							stroke='currentColor'
 							stroke-width='2'
 							viewBox='0 0 24 24'
+							aria-labelledby={`faq-svg-title-${idx}`}
 						>
+							<title id={`faq-svg-title-${idx}`}>Expand FAQ answer</title>
 							<path stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7' />
 						</svg>
 					</summary>
@@ -76,3 +79,19 @@ const faqData = [
 		}
 	</div>
 </section>
+<script is:inline type="module">
+  // Smooth fade-in-up on view using Intersection Observer
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeEls = document.querySelectorAll('.animate-fade-in-up-on-view');
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(el => observer.observe(el));
+  });
+</script>

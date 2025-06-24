@@ -6,14 +6,13 @@ import GithubWhite from '@src/assets/img/github-mark-white.svg';
 import GithubBlack from '@src/assets/img/github-mark.svg';
 
 const { projects } = Astro.props
-
 ---
 <div class="grid grid-cols-12 gap-5">
   {
     projects.map((project: Project, idx: number) => {
       const tags = project.tags || [];
       return (
-        <div class="col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 transition-all duration-300 opacity-0 translate-y-8 animate-fade-in-up" id={`project-card-${idx}`}> 
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 transition-all duration-300 opacity-0 translate-y-8 will-change-transform animate-fadeInUp" id={`project-card-${idx}`}> 
           <script is:inline type="module">
             window.toggleTags = window.toggleTags || function(idx) {
               const el = document.getElementById(`expanded-tags-${idx}`);
@@ -39,14 +38,14 @@ const { projects } = Astro.props
               <div class="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
                 {project.stargazers_count !== undefined && (
                   <span class="flex items-center gap-1">
-                    <Image src={GithubBlack} height={12} class="dark:hidden" alt="Stars" />
-                    <Image src={GithubWhite} height={12} class="hidden dark:block" alt="Stars" />
+                    <Image src={GithubBlack} height={12} width={12} class="dark:hidden" alt="Stars" loading="lazy" decoding="async" />
+                    <Image src={GithubWhite} height={12} width={12} class="hidden dark:block" alt="Stars" loading="lazy" decoding="async" />
                     {kFormatter(project.stargazers_count)}
                   </span>
                 )}
                 {project.forks_count !== undefined && (
                   <span class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 3v12a3 3 0 0 0 3 3h6"/><circle cx="6" cy="3" r="3"/><circle cx="18" cy="18" r="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-label="Forks"><path d="M6 3v12a3 3 0 0 0 3 3h6"/><circle cx="6" cy="3" r="3"/><circle cx="18" cy="18" r="3"/></svg>
                     {kFormatter(project.forks_count)}
                   </span>
                 )}
@@ -81,7 +80,7 @@ const { projects } = Astro.props
               project.demoLink &&
               <a class="underline flex items-center gap-2" href={project.demoLink} target="_blank" rel={project.demoLinkRel}>
                 Demo
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link" aria-label="External link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
               </a>
             }
           </div>
@@ -90,25 +89,13 @@ const { projects } = Astro.props
     })
   }
 </div>
-<style>
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
-}
-</style>
 <script is:inline type="module">
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.animate-fade-in-up').forEach((el, i) => {
-      el.style.animationDelay = `${i * 80}ms`;
+    document.querySelectorAll('.animate-fadeInUp').forEach((el, i) => {
+      el.classList.remove('opacity-0', 'translate-y-8');
+      el.classList.add('opacity-100', 'translate-y-0');
+      el.style.transition = 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)';
+      el.style.transitionDelay = `${i * 80}ms`;
     });
   });
 </script>

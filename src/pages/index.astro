@@ -11,80 +11,45 @@ import TechStack from '@src/components/TechStack.astro';
 ---
 
 <BaseLayout title={title} description={description}>
-	<div class='container'>
-		<main>
-			<Hero />
-
-			<Experience />
-						<TechStack/>
-
-			<!--      <RecentPosts/> -->
-			<RecentProjects />
-
-			<QNA />
-		</main>
-	</div>
+  <div class="container mx-auto px-4">
+    <main class="flex flex-col gap-16">
+      <Hero />
+      <Experience />
+      <TechStack />
+      <!-- <RecentPosts /> -->
+      <RecentProjects />
+      <QNA />
+    </main>
+  </div>
 </BaseLayout>
-<script is:inline>
-	const text = 'I am a Full Stack Developer';
-	const el = document.getElementById('typing-animation');
-	let i = 0;
-	let forward = true;
-	let delay = 80;
-	function typeLoop() {
-		if (!el) return;
-		if (forward) {
-			el.textContent = text.slice(0, i);
-			if (i < text.length) {
-				i++;
-				setTimeout(typeLoop, delay);
-			} else {
-				forward = false;
-				setTimeout(typeLoop, 1200);
-			}
-		} else {
-			el.textContent = text.slice(0, i);
-			if (i > 0) {
-				i--;
-				setTimeout(typeLoop, 40);
-			} else {
-				forward = true;
-				setTimeout(typeLoop, 400);
-			}
-		}
-	}
-	typeLoop();
-</script>
 
-<style>
-	@keyframes pulse-bg {
-		0%,
-		100% {
-			background-color: transparent;
-		}
-		50% {
-			background-color: inherit;
-		}
-	}
-	.focus\:animate-pulse:focus {
-		animation: pulse-bg 0.8s cubic-bezier(0.4, 0, 0.6, 1) 1;
-	}
-	@keyframes anime-frame {
-		0%,
-		100% {
-			box-shadow:
-				0 0 0 0 rgba(59, 130, 246, 0.5),
-				0 0 0 0 rgba(14, 165, 233, 0.4);
-			border-color: #3b82f6;
-		}
-		50% {
-			box-shadow:
-				0 0 0 8px rgba(59, 130, 246, 0.25),
-				0 0 0 16px rgba(14, 165, 233, 0.15);
-			border-color: #0ea5e9;
-		}
-	}
-	.animate-anime-frame {
-		animation: anime-frame 2.2s ease-in-out infinite;
-	}
-</style>
+<script is:inline>
+  const text = 'I am a Full Stack Developer';
+  const el = document.getElementById('typing-animation');
+  let i = 0;
+  let forward = true;
+  let delay = 80;
+  function typeLoop() {
+    if (!el) return;
+    if (forward) {
+      el.textContent = text.slice(0, i);
+      if (i < text.length) {
+        i++;
+        setTimeout(typeLoop, delay);
+      } else {
+        forward = false;
+        setTimeout(typeLoop, 1200);
+      }
+    } else {
+      el.textContent = text.slice(0, i);
+      if (i > 0) {
+        i--;
+        setTimeout(typeLoop, 40);
+      } else {
+        forward = true;
+        setTimeout(typeLoop, 400);
+      }
+    }
+  }
+  typeLoop();
+</script>
