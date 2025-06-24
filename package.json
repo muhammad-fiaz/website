@@ -20,7 +20,7 @@
 		"@astrojs/rss": "^4.0.12",
 		"@astrojs/sitemap": "^3.4.1",
 		"@tailwindcss/vite": "^4.1.10",
-		"astro": "^5.10.0",
+		"astro": "^5.10.1",
 		"astro-robots-txt": "^1.0.0",
 		"astro-seo-schema": "^5.0.0",
 		"schema-dts": "^1.1.5",
@@ -32,9 +32,9 @@
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.16",
-		"prettier": "^3.5.3",
+		"prettier": "^3.6.0",
 		"prettier-plugin-astro": "^0.14.1",
-		"vite": "^6.3.5"
+		"vite": "^7.0.0"
 	},
 	"homepage": "https://muhammadfiaz.com",
 	"repository": {
