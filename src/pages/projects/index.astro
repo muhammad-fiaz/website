@@ -53,26 +53,26 @@ import { Schema } from 'astro-seo-schema';
 		</script>
 	</div>
 	<Schema
-	  item={{
-	    '@context': 'https://schema.org',
-	    '@type': 'CollectionPage',
-	    name: title,
-	    description: description,
-	    url: 'https://muhammadfiaz.com/projects/',
-	    author: {
-	      '@type': 'Person',
-	      name: 'Muhammad Fiaz',
-	      url: 'https://muhammadfiaz.com/'
-	    },
-	    hasPart: projects.map((project) => ({
-	      '@type': 'CreativeWork',
-	      name: project.name,
-	      description: project.description,
-	      url: project.demoLink,
-	      keywords: project.tags?.join(', '),
-	      inLanguage: 'en',
-	      ...(project.githubUrl && { sameAs: [project.githubUrl] })
-	    }))
-	  }}
+		item={{
+			'@context': 'https://schema.org',
+			'@type': 'CollectionPage',
+			name: title,
+			description: description,
+			url: 'https://muhammadfiaz.com/projects/',
+			author: {
+				'@type': 'Person',
+				name: 'Muhammad Fiaz',
+				url: 'https://muhammadfiaz.com/'
+			},
+			hasPart: projects.map((project) => ({
+				'@type': 'CreativeWork',
+				name: project.name,
+				description: project.description,
+				url: project.demoLink,
+				keywords: project.tags?.join(', '),
+				inLanguage: 'en',
+				...(project.githubUrl && { sameAs: [project.githubUrl] })
+			}))
+		}}
 	/>
 </BaseLayout>

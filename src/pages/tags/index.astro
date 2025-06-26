@@ -75,8 +75,7 @@ const description = 'Post tags: concise keywords categorizing content for easy n
                       text-sm text-zinc-700 dark:text-zinc-300 no-underline px-3 py-1
                       transition-all duration-700
                     hover:border-zinc-700 dark:hover:border-zinc-300'
-										href={`/tags/${slugify(tag.value)}/`}
-									>
+										href={`/tags/${slugify(tag.value)}/`}>
 										{tag.label} ({tag.postCount})
 									</a>
 								))}

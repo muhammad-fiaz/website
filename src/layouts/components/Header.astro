@@ -1,8 +1,5 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { Image } from 'astro:assets';
-import GithubWhite from '@src/assets/img/github-mark-white.svg';
-import GithubBlack from '@src/assets/img/github-mark.svg';
 
 const menu = [
 	{
@@ -32,11 +29,11 @@ const menu = [
 			</h2>
 			<div class='flex'>
 				<a class='p-3 dark:hidden' href='https://github.com/muhammad-fiaz/portfolio' target='_blank'>
-					<Image src={GithubBlack} width={24} height={24} alt='Github logo' /></a
-				>
-				<a class='p-3 hidden dark:block' href='https://github.com/muhammad-fiaz/portfolio' target='_blank'
-					><Image src={GithubWhite} width={24} height={24} alt='Github logo' /></a
-				>
+					<img src='/assets/img/github-mark.svg' width='24' height='24' alt='Github logo' loading='lazy' decoding='async' />
+				</a>
+				<a class='p-3 hidden dark:block' href='https://github.com/muhammad-fiaz/portfolio' target='_blank'>
+					<img src='/assets/img/github-mark-white.svg' width='24' height='24' alt='Github logo' loading='lazy' decoding='async' />
+				</a>
 				<a class='p-3' href='https://www.linkedin.com/in/muhammad-fiaz-/' target='_blank' aria-label='LinkedIn'>
 					<svg width='24' height='24' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'
 						><path
@@ -56,11 +53,9 @@ const menu = [
 		<div
 			id='bottom-navbar'
 			class='fixed bottom-2 left-1/2 -translate-x-1/2 w-auto max-w-full px-4 z-999 transition-transform duration-500 ease-in-out flex justify-center items-center translate-y-full text-base md:text-lg'
-			style='min-height:64px;'
-		>
+			style='min-height:64px;'>
 			<div
-				class='flex items-center justify-center px-4 py-2 bg-white/90 dark:bg-zinc-900/75 backdrop-blur-md leading-tight rounded-full border dark:border-zinc-700 shadow-lg'
-			>
+				class='flex items-center justify-center px-4 py-2 bg-white/90 dark:bg-zinc-900/75 backdrop-blur-md leading-tight rounded-full border dark:border-zinc-700 shadow-lg'>
 				<div class='px-2.5 text-sm'>
 					<HeaderLink class='py-3 flex items-center' href='/' aria-label='Home'>
 						<svg
@@ -117,8 +112,7 @@ const menu = [
 						stroke-width='2'
 						stroke-linecap='round'
 						stroke-linejoin='round'
-						class='lucide lucide-moon'
-					>
+						class='lucide lucide-moon'>
 						<path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'></path></svg
 					>
 				</button>

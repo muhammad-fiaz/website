@@ -12,24 +12,24 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://muhammadfiaz.com',
-  integrations: [mdx(), sitemap(), partytown(), robotsTxt()],
+	site: 'https://muhammadfiaz.com',
+	integrations: [mdx(), sitemap(), partytown(), robotsTxt()],
 
-  markdown: {
-      extendDefaultPlugins: true,
-      rehypePlugins: [
-          [
-              autoNewTabExternalLinks,
-              {
-                  domain: 'muhammadfiaz.com'
-              }
-          ]
-      ]
+	markdown: {
+		extendDefaultPlugins: true,
+		rehypePlugins: [
+			[
+				autoNewTabExternalLinks,
+				{
+					domain: 'muhammadfiaz.com'
+				}
+			]
+		]
 	},
 
-  vite: {
-      plugins: [tailwindcss()]
+	vite: {
+		plugins: [tailwindcss()]
 	},
- output: 'static',
-  adapter: netlify()
+	output: 'static',
+	adapter: netlify()
 });

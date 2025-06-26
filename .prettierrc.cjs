@@ -8,7 +8,7 @@ module.exports = {
 	jsxSingleQuote: true,
 	trailingComma: 'none',
 	bracketSpacing: true,
-	jsxBracketSameLine: true,
+	bracketSameLine: true,
 	arrowParens: 'always',
 	rangeStart: 0,
 	rangeEnd: Infinity,
@@ -17,8 +17,6 @@ module.exports = {
 	proseWrap: 'preserve',
 	htmlWhitespaceSensitivity: 'css',
 	endOfLine: 'auto',
-	importOrderSeparation: true,
-	importOrderSortSpecifiers: true,
 	plugins: ['prettier-plugin-astro'],
 	overrides: [
 		{

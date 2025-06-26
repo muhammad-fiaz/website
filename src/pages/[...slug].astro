@@ -41,8 +41,7 @@ const { Content, headings } = await render(post);
 					<div>
 						<h1 class='my-1! leading-tight'>{title}</h1>
 						<div
-							class='text-sm font-medium mt-2 sm:mt-0 py-1 md:text-right flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center'
-						>
+							class='text-sm font-medium mt-2 sm:mt-0 py-1 md:text-right flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center'>
 							{
 								(
 									<div class='flex gap-2'>
@@ -52,8 +51,7 @@ const { Content, headings } = await render(post);
                           text-sm text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5
                           transition-all duration-700
                         hover:border-zinc-700 dark:hover:border-zinc-300'
-												href={`/tags/${slugify(tag)}`}
-											>
+												href={`/tags/${slugify(tag)}`}>
 												{tag}
 											</a>
 										))}

@@ -18,7 +18,6 @@ const isActive = href === pathname || href === '/' + subpath?.[0];
 		{ 'text-zinc-600 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-zinc-50': !isActive },
 		{ 'text-zinc-950 dark:text-zinc-50': isActive }
 	]}
-	{...props}
->
+	{...props}>
 	<slot />
 </a>

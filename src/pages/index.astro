@@ -1,8 +1,8 @@
 ---
 export const prerender = true;
 
-const title = "Muhammad Fiaz | Full Stack Developer";
-const description = "Welcome to my portfolio! Discover my latest projects, skills, and professional journey as a full stack developer.";
+const title = 'Muhammad Fiaz | Full Stack Developer';
+const description = 'Welcome to my portfolio! Discover my latest projects, skills, and professional journey as a full stack developer.';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Experience from '../components/Experience.astro';
 // import RecentPosts from '../layouts/components/RecentPosts.astro';
@@ -13,45 +13,45 @@ import TechStack from '@src/components/TechStack.astro';
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="container mx-auto px-4">
-    <main class="flex flex-col gap-16">
-      <Hero />
-      <Experience />
-      <TechStack />
-      <!-- <RecentPosts /> -->
-      <RecentProjects />
-      <QNA />
-    </main>
-  </div>
+	<div class='container mx-auto px-4'>
+		<main class='flex flex-col gap-16'>
+			<Hero />
+			<Experience />
+			<TechStack />
+			<!-- <RecentPosts /> -->
+			<RecentProjects />
+			<QNA />
+		</main>
+	</div>
 </BaseLayout>
 
 <script is:inline>
-  const text = 'I am a Full Stack Developer';
-  const el = document.getElementById('typing-animation');
-  let i = 0;
-  let forward = true;
-  let delay = 80;
-  function typeLoop() {
-    if (!el) return;
-    if (forward) {
-      el.textContent = text.slice(0, i);
-      if (i < text.length) {
-        i++;
-        setTimeout(typeLoop, delay);
-      } else {
-        forward = false;
-        setTimeout(typeLoop, 1200);
-      }
-    } else {
-      el.textContent = text.slice(0, i);
-      if (i > 0) {
-        i--;
-        setTimeout(typeLoop, 40);
-      } else {
-        forward = true;
-        setTimeout(typeLoop, 400);
-      }
-    }
-  }
-  typeLoop();
+	const text = 'I am a Full Stack Developer';
+	const el = document.getElementById('typing-animation');
+	let i = 0;
+	let forward = true;
+	let delay = 80;
+	function typeLoop() {
+		if (!el) return;
+		if (forward) {
+			el.textContent = text.slice(0, i);
+			if (i < text.length) {
+				i++;
+				setTimeout(typeLoop, delay);
+			} else {
+				forward = false;
+				setTimeout(typeLoop, 1200);
+			}
+		} else {
+			el.textContent = text.slice(0, i);
+			if (i > 0) {
+				i--;
+				setTimeout(typeLoop, 40);
+			} else {
+				forward = true;
+				setTimeout(typeLoop, 400);
+			}
+		}
+	}
+	typeLoop();
 </script>

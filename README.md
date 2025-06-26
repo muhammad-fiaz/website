@@ -24,7 +24,6 @@ If you encounter any bugs, have questions, or want to suggest new features, plea
 - [Node.js](https://nodejs.org/) (v18 or newer recommended)
 - [npm](https://www.npmjs.com/) (comes with Node.js) or [pnpm](https://pnpm.io/) or [yarn](https://yarnpkg.com/) or [bun](https://bun.sh/)
 
-
 ### Installation
 
 1. **Clone the repository:**

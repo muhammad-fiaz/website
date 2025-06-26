@@ -24,8 +24,7 @@ const { post }: Record<string, any> | { post: BlogPost } = Astro.props;
           text-sm text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5
           transition-all duration-700
           hover:border-zinc-700 dark:hover:border-zinc-300'
-					href={`/tags/${slugify(tag)}`}
-				>
+					href={`/tags/${slugify(tag)}`}>
 					{tag}
 				</a>
 			))

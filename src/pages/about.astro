@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -8,12 +7,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		<main class='prose text-lg dark:prose-invert'>
 			<article>
 				<div class='flex flex-col md:flex-row gap-6 items-center mb-2'>
-					<Image
+					<img
 						src='https://avatars.githubusercontent.com/u/75434191?v=4'
 						alt='Muhammad Fiaz'
-						width={160}
-						height={160}
+						width='160'
+						height='160'
 						class='rounded-full border-4 border-primary shadow-lg'
+						loading='lazy'
+						decoding='async'
 					/>
 					<div>
 						<h1 class='text-3xl font-bold mb-2'>A Brief Introduction: Who Am I?</h1>

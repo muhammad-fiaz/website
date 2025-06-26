@@ -1,42 +1,47 @@
 ---
-import { Image } from 'astro:assets';
+
 ---
-<section class="w-full lg:min-h-screen md:px-8 xl:px-20 text-white bg-primary flex flex-col items-center justify-center">
-  <div class="w-full max-w-5xl flex flex-col items-center justify-center py-8">
-    <!-- Heading and Description -->
-    <div class="w-full text-center mb-6 opacity-0 translate-y-8 will-change-transform transition-all duration-1000 ease-out animate-fade-in-up-on-view">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-center text-neutral-900 dark:text-white">
-        Explore My Expertise & Tech Stack
-      </h2>
-      <p class="mb-6 text-center text-neutral-700 dark:text-neutral-300">
-        These are the tools and technologies I use as a full stack developer with a passion for AI integration. I leverage modern stacks to build scalable, intelligent web applications—spanning both frontend and backend for robust, maintainable, and user-friendly solutions.
-      </p>
-    </div>
-    <!-- Skills Icon Image -->
-    <Image
-      src="https://skillicons.dev/icons?i=androidstudio,angular,atom,aws,azure,bash,blender,bootstrap,c,cs,cpp,cloudflare,codepen,css,dart,django,docker,dotnet,eclipse,express,figma,firebase,flask,flutter,gcp,git,github,githubactions,gitlab,go,gradle,gulp,heroku,html,idea,java,js,jquery,kotlin,linkedin,linux,md,mongodb,mysql,netlify,nextjs,nginx,nodejs,ps,php,rust,svelte,tauri,electron,postgres,powershell,py,pytorch,qt,react,redux,regex,sass,sqlite,stackoverflow,svg,tailwind,tensorflow,twitter,ts,unity,unreal,vercel,visualstudio,vite,vscode,vue,webflow,webpack,wordpress&perline=15"
-      alt="My Skills"
-      class="w-full max-w-3xl h-auto rounded-lg bg-transparent opacity-0 translate-y-8 will-change-transform transition-all duration-1000 ease-out animate-fade-in-up-on-view hover:scale-105"
-      width={1200}
-      height={200}
-      loading="lazy"
-      decoding="async"
-    />
-  </div>
+
+<section class='w-full lg:min-h-screen md:px-8 xl:px-20 text-white bg-primary flex flex-col items-center justify-center'>
+	<div class='w-full max-w-5xl flex flex-col items-center justify-center py-8'>
+		<!-- Heading and Description -->
+		<div
+			class='w-full text-center mb-6 opacity-0 translate-y-8 will-change-transform transition-all duration-1000 ease-out animate-fade-in-up-on-view'>
+			<h2 class='text-2xl sm:text-3xl font-bold mb-2 text-center text-neutral-900 dark:text-white'>Explore My Expertise & Tech Stack</h2>
+			<p class='mb-6 text-center text-neutral-700 dark:text-neutral-300'>
+				These are the tools and technologies I use as a full stack developer with a passion for AI integration. I leverage modern stacks to
+				build scalable, intelligent web applications—spanning both frontend and backend for robust, maintainable, and user-friendly
+				solutions.
+			</p>
+		</div>
+		<!-- Skills Icon Image -->
+		<img
+			src='https://skillicons.dev/icons?i=androidstudio,angular,atom,aws,azure,bash,blender,bootstrap,c,cs,cpp,cloudflare,codepen,css,dart,django,docker,dotnet,eclipse,express,figma,firebase,flask,flutter,gcp,git,github,githubactions,gitlab,go,gradle,gulp,heroku,html,idea,java,js,jquery,kotlin,linkedin,linux,md,mongodb,mysql,netlify,nextjs,nginx,nodejs,ps,php,rust,svelte,tauri,electron,postgres,powershell,py,pytorch,qt,react,redux,regex,sass,sqlite,stackoverflow,svg,tailwind,tensorflow,twitter,ts,unity,unreal,vercel,visualstudio,vite,vscode,vue,webflow,webpack,wordpress&perline=15'
+			alt='My Skills'
+			class='w-full max-w-3xl h-auto rounded-lg bg-transparent opacity-0 translate-y-8 will-change-transform transition-all duration-1000 ease-out animate-fade-in-up-on-view hover:scale-105'
+			width='1200'
+			height='200'
+			loading='lazy'
+			decoding='async'
+		/>
+	</div>
 </section>
-<script is:inline type="module">
-  // Smooth fade-in-up on view using Intersection Observer
-  document.addEventListener('DOMContentLoaded', () => {
-    const fadeEls = document.querySelectorAll('.animate-fade-in-up-on-view');
-    const observer = new window.IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove('opacity-0', 'translate-y-8');
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    fadeEls.forEach(el => observer.observe(el));
-  });
+<script is:inline type='module'>
+	// Smooth fade-in-up on view using Intersection Observer
+	document.addEventListener('DOMContentLoaded', () => {
+		const fadeEls = document.querySelectorAll('.animate-fade-in-up-on-view');
+		const observer = new window.IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.remove('opacity-0', 'translate-y-8');
+						entry.target.classList.add('opacity-100', 'translate-y-0');
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.15 }
+		);
+		fadeEls.forEach((el) => observer.observe(el));
+	});
 </script>
