@@ -10,10 +10,11 @@ const { title, description, image } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='en' class='bg-white dark:bg-zinc-900 dark:text-zinc-100'>
 	<head>
 		<BaseHead title={title} description={description} image={image} />
 		<script is:inline>
+			// Immediately set theme before any rendering to prevent flash
 			(function () {
 				function getCookie(name) {
 					const value = `; ${document.cookie}`;
@@ -21,15 +22,32 @@ const { title, description, image } = Astro.props;
 					if (parts.length === 2) return parts.pop().split(';').shift();
 				}
 				var theme = getCookie('theme');
+				// Also check localStorage as fallback
+				if (!theme && localStorage) {
+					theme = localStorage.getItem('theme');
+				}
+				// Also check system preference as fallback
+				if (!theme && window.matchMedia) {
+					theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				}
 				if (theme === 'dark') {
 					document.documentElement.classList.add('dark');
 				} else {
 					document.documentElement.classList.remove('dark');
 				}
+				// Sync with localStorage
+				if (localStorage && theme) {
+					localStorage.setItem('theme', theme);
+				}
 			})();
 		</script>
 	</head>
-	<body class='bg-white dark:bg-zinc-900 dark:text-zinc-100 pt-4 sm:pt-0'>
+	<body class='bg-white dark:bg-zinc-900 dark:text-zinc-100 pt-4 sm:pt-0 invisible'>
+		<script is:inline>
+			// Immediately show content after theme is set
+			document.body.classList.remove('invisible');
+			document.body.classList.add('visible');
+		</script>
 		<SplashScreen />
 		<Header />
 		<div class='py-8 min-h-[calc(100vh-160px)]'>
@@ -55,6 +73,10 @@ const { title, description, image } = Astro.props;
 		<script is:inline>
 			window.setTheme = function (theme) {
 				document.cookie = `theme=${theme};path=/;max-age=31536000`;
+				// Also save to localStorage for faster access
+				if (localStorage) {
+					localStorage.setItem('theme', theme);
+				}
 				if (theme === 'dark') {
 					document.documentElement.classList.add('dark');
 				} else {
