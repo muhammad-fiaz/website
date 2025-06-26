@@ -23,21 +23,28 @@
 	</div>
 </div>
 <script is:inline>
-	// Animate the dots in Loading... (cycle through 1, 2, 3 dots, then back to 1)
+	// Start the dot animation immediately and keep it running
+	const dots = document.getElementById('loading-dots');
+	let count = 1;
+
+	// Start dot animation right away
+	const dotInterval = setInterval(() => {
+		count = count < 3 ? count + 1 : 1;
+		if (dots) dots.textContent = '.'.repeat(count);
+	}, 400); // Smooth dot animation timing
+
+	// Handle splash screen removal when page loads
 	window.addEventListener('load', function () {
-		const dots = document.getElementById('loading-dots');
-		let count = 1;
-		const dotInterval = setInterval(() => {
-			count = count < 3 ? count + 1 : 1;
-			if (dots) dots.textContent = '.'.repeat(count);
-		}, 200); // Faster dot animation
 		const splash = document.getElementById('splash-screen');
 		if (splash) {
-			splash.style.opacity = '0';
+			// Keep dot animation running until splash screen is fully removed
 			setTimeout(() => {
-				splash.remove();
-				clearInterval(dotInterval);
-			}, 500);
+				splash.style.opacity = '0';
+				setTimeout(() => {
+					splash.remove();
+					clearInterval(dotInterval); // Only clear when splash is completely gone
+				}, 500);
+			}, 200); // Small delay to let user see the loading animation
 		}
 	});
 </script>
