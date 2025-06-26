@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
 type PicSize = 'sm' | 'md' | 'lg';
 interface Props {
 	picSize: PicSize;
@@ -19,7 +17,14 @@ const { picSize } = Astro.props;
 			{ 'w-[70px] h-[70px]': picSize === 'md' },
 			{ 'w-[90px] h-[90px]': picSize === 'lg' }
 		]}>
-		<Image src='https://avatars.githubusercontent.com/u/75434191?v=4' alt='Muhammad Fiaz' width={300} height={300} />
+		<img 
+			src='https://avatars.githubusercontent.com/u/75434191?v=4' 
+			alt='Muhammad Fiaz' 
+			width='300' 
+			height='300'
+			class='w-full h-full object-cover'
+			loading='lazy'
+		/>
 	</a>
 	<div>
 		<div>
