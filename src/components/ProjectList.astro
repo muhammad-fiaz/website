@@ -11,8 +11,9 @@ const { projects } = Astro.props;
 			const tags = project.tags || [];
 			return (
 				<div
-					class='col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 transition-all duration-300 opacity-0 translate-y-8 will-change-transform animate-fadeInUp'
-					id={`project-card-${idx}`}>
+					class='col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-2xs p-5 project-card'
+					id={`project-card-${idx}`}
+					data-index={idx}>
 					<div class='flex items-center justify-between my-2'>
 						<h3 class='font-semibold'>
 							<a class='underline' href={project.demoLink} target='_blank' rel={project.demoLinkRel}>
@@ -115,13 +116,169 @@ const { projects } = Astro.props;
 		})
 	}
 </div>
+
+<style>
+	.project-card {
+		opacity: 0;
+		transform: translateY(32px);
+		will-change: transform, opacity;
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+					box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+					border-color 0.3s ease;
+	}
+
+	/* Animation for cards that are visible on initial load */
+	.project-card.animate-on-load {
+		animation: slideUpFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+	}
+
+	/* Animation for cards that come into view on scroll */
+	.project-card.animate-in-view {
+		animation: slideUpFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+	}
+
+	/* Animation delays for staggered effect - only for initial load */
+	.project-card.animate-on-load[data-index="0"] { animation-delay: 0ms; }
+	.project-card.animate-on-load[data-index="1"] { animation-delay: 100ms; }
+	.project-card.animate-on-load[data-index="2"] { animation-delay: 200ms; }
+	.project-card.animate-on-load[data-index="3"] { animation-delay: 300ms; }
+	.project-card.animate-on-load[data-index="4"] { animation-delay: 400ms; }
+	.project-card.animate-on-load[data-index="5"] { animation-delay: 500ms; }
+	.project-card.animate-on-load[data-index="6"] { animation-delay: 600ms; }
+	.project-card.animate-on-load[data-index="7"] { animation-delay: 700ms; }
+	.project-card.animate-on-load[data-index="8"] { animation-delay: 800ms; }
+	.project-card.animate-on-load[data-index="9"] { animation-delay: 900ms; }
+	.project-card.animate-on-load[data-index="10"] { animation-delay: 1000ms; }
+	.project-card.animate-on-load[data-index="11"] { animation-delay: 1100ms; }
+	.project-card.animate-on-load[data-index="12"] { animation-delay: 1200ms; }
+	.project-card.animate-on-load[data-index="13"] { animation-delay: 1300ms; }
+	.project-card.animate-on-load[data-index="14"] { animation-delay: 1400ms; }
+	.project-card.animate-on-load[data-index="15"] { animation-delay: 1500ms; }
+
+	@keyframes slideUpFadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(32px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Enhanced hover effects */
+	.project-card:hover {
+		transform: translateY(-8px) scale(1.02);
+		box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15), 0 25px 50px -12px rgb(0 0 0 / 0.1);
+		border-color: rgb(59 130 246 / 0.3);
+	}
+
+	.dark .project-card:hover {
+		box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4), 0 25px 50px -12px rgb(0 0 0 / 0.2);
+		border-color: rgb(59 130 246 / 0.5);
+	}
+
+	/* Focus effects for accessibility */
+	.project-card:focus-within {
+		transform: translateY(-4px);
+		box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+		border-color: rgb(59 130 246 / 0.5);
+		outline: 2px solid rgb(59 130 246 / 0.3);
+		outline-offset: 2px;
+	}
+
+	/* Hover effects for links within cards */
+	.project-card h3 a {
+		transition: color 0.3s ease;
+	}
+
+	.project-card:hover h3 a {
+		color: rgb(59 130 246);
+	}
+
+	.dark .project-card:hover h3 a {
+		color: rgb(147 197 253);
+	}
+
+	/* Tag hover effects */
+	.project-card .tag {
+		transition: all 0.3s ease;
+	}
+
+	.project-card:hover .tag {
+		transform: translateY(-1px);
+		border-color: rgb(59 130 246 / 0.3);
+		background-color: rgb(59 130 246 / 0.05);
+	}
+
+	.dark .project-card:hover .tag {
+		border-color: rgb(147 197 253 / 0.3);
+		background-color: rgb(59 130 246 / 0.1);
+	}
+</style>
+
 <script is:inline type='module'>
+	// Intersection Observer for scroll-based animations
+	const observerOptions = {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	};
+
+	const animateOnScroll = new IntersectionObserver((entries) => {
+		entries.forEach((entry, index) => {
+			if (entry.isIntersecting) {
+				// Add a small delay for each card that comes into view
+				setTimeout(() => {
+					entry.target.classList.add('animate-in-view');
+				}, index * 100);
+				animateOnScroll.unobserve(entry.target);
+			}
+		});
+	}, observerOptions);
+
 	document.addEventListener('DOMContentLoaded', () => {
-		document.querySelectorAll('.animate-fadeInUp').forEach((el, i) => {
-			el.classList.remove('opacity-0', 'translate-y-8');
-			el.classList.add('opacity-100', 'translate-y-0');
-			el.style.transition = 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)';
-			el.style.transitionDelay = `${i * 80}ms`;
+		const allCards = document.querySelectorAll('.project-card');
+		const viewportHeight = window.innerHeight;
+		
+		allCards.forEach((card, index) => {
+			const cardTop = card.getBoundingClientRect().top;
+			
+			// Cards visible on initial load get immediate staggered animation
+			if (cardTop < viewportHeight) {
+				card.classList.add('animate-on-load');
+			} else {
+				// Cards below the fold get scroll-based animation
+				animateOnScroll.observe(card);
+			}
+		});
+
+		// Enhanced hover effects with cursor tracking
+		allCards.forEach(card => {
+			card.addEventListener('mouseenter', (e) => {
+				e.target.style.willChange = 'transform';
+			});
+
+			card.addEventListener('mouseleave', (e) => {
+				e.target.style.willChange = 'auto';
+			});
+
+			// Add subtle cursor following effect
+			card.addEventListener('mousemove', (e) => {
+				const rect = card.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
+				
+				const rotateX = (y - centerY) / 20;
+				const rotateY = (centerX - x) / 20;
+				
+				card.style.transform = `translateY(-8px) scale(1.02) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+			});
+
+			card.addEventListener('mouseleave', (e) => {
+				card.style.transform = '';
+			});
 		});
 	});
 </script>

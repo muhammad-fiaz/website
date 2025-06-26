@@ -125,7 +125,7 @@ const experiences = [
 			{
 				experiences.map((exp, idx) => {
 					return (
-						<div class={`relative flex items-start sm:items-center fade-in-on-scroll opacity-0 translate-y-8 transition-all duration-700`}>
+						<div class={`relative flex items-start sm:items-center`}>
 							{/* Circle indicator */}
 							<div class='absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 z-10 mt-1 sm:mt-0'>
 								<div
@@ -172,21 +172,3 @@ const experiences = [
 		</div>
 	</div>
 </section>
-<script is:inline>
-	window.addEventListener('DOMContentLoaded', () => {
-		const fadeEls = document.querySelectorAll('.fade-in-on-scroll');
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('opacity-100', 'translate-y-0');
-						entry.target.classList.remove('opacity-0', 'translate-y-8');
-						observer.unobserve(entry.target);
-					}
-				});
-			},
-			{ threshold: 0.2 }
-		);
-		fadeEls.forEach((el) => observer.observe(el));
-	});
-</script>

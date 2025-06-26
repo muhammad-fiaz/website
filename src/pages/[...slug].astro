@@ -21,11 +21,19 @@ const { GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID } = loa
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post: any) => ({
-		params: { slug: post.id },
+		params: { slug: post.slug || post.id },
 		props: post
 	}));
 }
+
 type Props = CollectionEntry<'blog'>;
+
+// Handle cases where the route doesn't match any blog post
+const { slug } = Astro.params;
+if (slug && (slug.startsWith('.well-known') || slug.includes('chrome') || slug.includes('devtools'))) {
+	return new Response(null, { status: 404 });
+}
+
 const post = Astro.props;
 const {
 	data: { title, seoTitle, description, coverImage, pubDate, updatedDate, tags }

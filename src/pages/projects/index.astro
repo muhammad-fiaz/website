@@ -9,21 +9,21 @@ import { Schema } from 'astro-seo-schema';
 
 <BaseLayout title={title} description={description}>
 	<div class='container'>
-		<div class='mb-10 text-center'>
-			<h1 class='text-3xl font-bold mb-2'>All My Projects</h1>
-			<p class='text-zinc-700 dark:text-zinc-300 text-lg'>All my project portfolio from real projects to open source projects.</p>
-			<div class='flex justify-center'>
+		<div class='mb-10 text-center animate-header'>
+			<h1 class='text-3xl font-bold mb-2 header-element' data-delay="0">All My Projects</h1>
+			<p class='text-zinc-700 dark:text-zinc-300 text-lg header-element transition-all duration-300 ease-in-out cursor-default hover:transform hover:-translate-y-px hover:text-blue-500 dark:hover:text-blue-300' data-delay="1">All my project portfolio from real projects to open source projects.</p>
+			<div class='flex justify-center header-element' data-delay="2">
 				<input
 					id='project-search'
 					type='text'
 					placeholder='Search projects...'
-					class='mt-4 w-full max-w-md px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100'
+					class='search-input mt-4 w-full max-w-md px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-all duration-300 ease-out hover:transform hover:-translate-y-0.5 hover:shadow-lg hover:border-blue-500/50 focus:transform focus:-translate-y-0.5 focus:scale-102 focus:shadow-xl focus:shadow-blue-500/10'
 					oninput='window.filterProjects && window.filterProjects()'
 					autocomplete='off'
 				/>
 			</div>
 		</div>
-		<div id='projects-list'>
+		<div id='projects-list' class='projects-container transition-all duration-300 ease-in-out hover:transform hover:-translate-y-0.5'>
 			{
 				projects.length === 0 ? (
 					<div class='text-gray-500 text-lg py-8 text-center'>No projects found.</div>
@@ -52,6 +52,74 @@ import { Schema } from 'astro-seo-schema';
 			};
 		</script>
 	</div>
+	<style>
+		/* Custom keyframe animations that can't be replicated in Tailwind */
+		@keyframes slideUpFadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(24px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes pulse {
+			0%, 100% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0.8;
+			}
+		}
+
+		@keyframes searchingAnimation {
+			0% {
+				background-position: 0 0;
+			}
+			100% {
+				background-position: 20px 20px;
+			}
+		}
+
+		/* Initial animation states - can't be done with Tailwind utilities */
+		.header-element {
+			opacity: 0;
+			transform: translateY(24px);
+			animation: slideUpFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		}
+
+		.header-element[data-delay="0"] { animation-delay: 0ms; }
+		.header-element[data-delay="1"] { animation-delay: 100ms; }
+		.header-element[data-delay="2"] { animation-delay: 200ms; }
+
+		.projects-container {
+			opacity: 0;
+			transform: translateY(24px);
+			animation: slideUpFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+			animation-delay: 300ms;
+		}
+
+		/* Loading state for search - custom striped background animation */
+		.search-input.searching {
+			background-image: linear-gradient(45deg, transparent 25%, rgba(59, 130, 246, 0.1) 25%, rgba(59, 130, 246, 0.1) 50%, transparent 50%, transparent 75%, rgba(59, 130, 246, 0.1) 75%);
+			background-size: 20px 20px;
+			animation: searchingAnimation 1s linear infinite;
+		}
+
+		/* Smooth scroll behavior */
+		html {
+			scroll-behavior: smooth;
+		}
+
+		/* Enhanced focus styles for accessibility */
+		*:focus-visible {
+			outline: 2px solid rgb(59 130 246);
+			outline-offset: 2px;
+			border-radius: 4px;
+		}
+	</style>
 	<Schema
 		item={{
 			'@context': 'https://schema.org',
