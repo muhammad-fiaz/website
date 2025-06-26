@@ -13,24 +13,24 @@ import TechStack from '@src/components/TechStack.astro';
 
 <BaseLayout title={title} description={description}>
 	<!-- Hero section - fixed and centered, full viewport -->
-	<div class='animate-section opacity-0 transform translate-y-16 scale-95' data-delay="0">
+	<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="0">
 		<Hero />
 	</div>
 	
 	<!-- Other sections - normal scroll flow -->
 	<div class='container mx-auto px-4'>
 		<main class='flex flex-col gap-16 relative z-10'>
-			<div class='animate-section opacity-0 transform translate-y-16 scale-95' data-delay="100">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="200">
 				<Experience />
 			</div>
-			<div class='animate-section opacity-0 transform translate-y-16 scale-95' data-delay="200">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="400">
 				<TechStack />
 			</div>
 			<!-- <RecentPosts /> -->
-			<div class='animate-section opacity-0 transform translate-y-16 scale-95' data-delay="300">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="600">
 				<RecentProjects />
 			</div>
-			<div class='animate-section opacity-0 transform translate-y-16 scale-95' data-delay="400">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="800">
 				<QNA />
 			</div>
 		</main>
@@ -38,41 +38,47 @@ import TechStack from '@src/components/TechStack.astro';
 </BaseLayout>
 
 <script is:inline>
-	// Typing animation
+	// Typing animation with smooth, slower timing
 	const text = 'I am a Full Stack Developer';
 	const el = document.getElementById('typing-animation');
 	let i = 0;
 	let forward = true;
-	let delay = 80;
-	function typeLoop() {
+	let lastTime = 0;
+	const forwardDelay = 120; // Slower typing
+	const backwardDelay = 60;  // Slower deletion
+	
+	function typeLoop(currentTime) {
 		if (!el) return;
-		if (forward) {
-			el.textContent = text.slice(0, i);
-			if (i < text.length) {
-				i++;
-				setTimeout(typeLoop, delay);
+		
+		if (currentTime - lastTime >= (forward ? forwardDelay : backwardDelay)) {
+			if (forward) {
+				el.textContent = text.slice(0, i);
+				if (i < text.length) {
+					i++;
+					lastTime = currentTime;
+				} else {
+					forward = false;
+					lastTime = currentTime + 2000; // Longer pause at end
+				}
 			} else {
-				forward = false;
-				setTimeout(typeLoop, 1200);
-			}
-		} else {
-			el.textContent = text.slice(0, i);
-			if (i > 0) {
-				i--;
-				setTimeout(typeLoop, 40);
-			} else {
-				forward = true;
-				setTimeout(typeLoop, 400);
+				el.textContent = text.slice(0, i);
+				if (i > 0) {
+					i--;
+					lastTime = currentTime;
+				} else {
+					forward = true;
+					lastTime = currentTime + 800; // Longer pause at start
+				}
 			}
 		}
-	}
-	typeLoop();
-
-	// Section animations on scroll
-	document.addEventListener('DOMContentLoaded', () => {
-		// Force reflow to ensure proper initial state
-		document.body.offsetHeight;
 		
+		requestAnimationFrame(typeLoop);
+	}
+	
+	requestAnimationFrame(typeLoop);
+
+	// Smooth, slow fade-in animations with gentle timing
+	document.addEventListener('DOMContentLoaded', () => {
 		const observerOptions = {
 			threshold: 0.1,
 			rootMargin: '0px 0px -50px 0px'
@@ -83,14 +89,23 @@ import TechStack from '@src/components/TechStack.astro';
 				if (entry.isIntersecting) {
 					const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
 					
-					// Use requestAnimationFrame for better Chrome compatibility
+					// Triple requestAnimationFrame for ultra-smooth start
 					requestAnimationFrame(() => {
-						setTimeout(() => {
-							entry.target.style.transition = 'opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-							entry.target.style.opacity = '1';
-							entry.target.style.transform = 'translateY(0px) scale(1)';
-							entry.target.style.willChange = 'auto'; // Cleanup after animation
-						}, delay);
+						requestAnimationFrame(() => {
+							requestAnimationFrame(() => {
+								setTimeout(() => {
+									// Very slow, gentle transition with smooth easing
+									entry.target.style.transition = 'opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.8s cubic-bezier(0.25, 0.1, 0.25, 1)';
+									entry.target.style.opacity = '1';
+									entry.target.style.transform = 'translateY(0px) scale(1)';
+									
+									// Clean up will-change after animation completes
+									setTimeout(() => {
+										entry.target.style.willChange = 'auto';
+									}, 1800);
+								}, delay);
+							});
+						});
 					});
 
 					sectionObserver.unobserve(entry.target);
@@ -98,101 +113,84 @@ import TechStack from '@src/components/TechStack.astro';
 			});
 		}, observerOptions);
 
-		// Function to prepare sections for animation
+		// Gentle section preparation with subtle initial transforms
 		function prepareSections() {
-			document.querySelectorAll('.animate-section').forEach((section) => {
-				// Ensure initial state is properly set for Chrome
+			const sections = document.querySelectorAll('.animate-section');
+			
+			// Very gentle initial state for smooth fade-in
+			sections.forEach((section) => {
 				section.style.opacity = '0';
-				section.style.transform = 'translateY(64px) scale(0.95)';
+				section.style.transform = 'translateY(24px) scale(0.98)';
 				section.style.willChange = 'opacity, transform';
-				// Force browser to register the styles
-				section.offsetHeight;
+				section.style.backfaceVisibility = 'hidden';
+				section.style.perspective = '1000px';
 			});
+			
+			// Smooth layout calculation
+			document.body.offsetHeight;
 		}
 
-		// Function to start observing sections
+		// Gentle animation start
 		function startSectionAnimations() {
 			prepareSections();
 			
-			// Small delay to ensure DOM is ready
-			setTimeout(() => {
-				document.querySelectorAll('.animate-section').forEach((section) => {
-					sectionObserver.observe(section);
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					document.querySelectorAll('.animate-section').forEach((section) => {
+						sectionObserver.observe(section);
+					});
 				});
-			}, 100);
+			});
 		}
 
-		// Improved splash screen detection for Chrome
+		// Simplified splash screen detection
 		function isSplashScreenGone() {
 			const splash = document.getElementById('splash-screen');
 			if (!splash) return true;
 			
-			const computedStyle = window.getComputedStyle(splash);
-			return splash.style.display === 'none' || 
-				   computedStyle.display === 'none' ||
-				   splash.classList.contains('hidden') ||
-				   computedStyle.opacity === '0' ||
-				   computedStyle.visibility === 'hidden';
+			const style = window.getComputedStyle(splash);
+			return style.display === 'none' || 
+				   style.opacity === '0' || 
+				   style.visibility === 'hidden' ||
+				   splash.classList.contains('hidden');
 		}
 
-		// More robust splash screen waiting
+		// Patient splash screen waiting
 		function waitForSplashScreen() {
 			return new Promise((resolve) => {
-				let resolved = false;
-				
-				function checkAndResolve() {
-					if (!resolved && isSplashScreenGone()) {
-						resolved = true;
-						resolve();
-					}
-				}
-
-				// Immediate check
 				if (isSplashScreenGone()) {
 					resolve();
 					return;
 				}
 
-				// Multiple detection methods for Chrome compatibility
+				let resolved = false;
+				
 				const checkInterval = setInterval(() => {
-					if (isSplashScreenGone()) {
+					if (!resolved && isSplashScreenGone()) {
+						resolved = true;
 						clearInterval(checkInterval);
-						checkAndResolve();
+						resolve();
 					}
-				}, 50); // More frequent checks for Chrome
+				}, 150); // Less frequent checks for gentler behavior
 
-				// MutationObserver for DOM changes
-				const splashObserver = new MutationObserver(() => {
-					if (isSplashScreenGone()) {
-						splashObserver.disconnect();
-						clearInterval(checkInterval);
-						checkAndResolve();
-					}
-				});
-
-				// Observe document for any changes
-				splashObserver.observe(document.documentElement, { 
-					childList: true, 
-					subtree: true,
-					attributes: true,
-					attributeFilter: ['style', 'class']
-				});
-
-				// Fallback timeout
+				// Patient fallback timeout
 				setTimeout(() => {
-					clearInterval(checkInterval);
-					splashObserver.disconnect();
-					checkAndResolve();
+					if (!resolved) {
+						resolved = true;
+						clearInterval(checkInterval);
+						resolve();
+					}
 				}, 6000);
 			});
 		}
 
-		// Start animations with Chrome-compatible timing
+		// Start animations with gentle, patient timing
 		waitForSplashScreen().then(() => {
-			// Longer delay for Chrome to ensure smooth transition
-			setTimeout(() => {
-				startSectionAnimations();
-			}, 750);
+			requestAnimationFrame(() => {
+				setTimeout(() => {
+					startSectionAnimations();
+				}, 1000); // Longer initial delay for smooth transition
+			});
 		});
 	});
 </script>

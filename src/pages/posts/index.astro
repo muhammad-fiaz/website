@@ -6,7 +6,7 @@ import PostsByYear from '../../components/PostsByYear.astro';
 import { Schema } from 'astro-seo-schema';
 
 type BlogPost = CollectionEntry<'blog'>;
-const title = 'All Posts | Muhammad Fiaz';
+const title = 'All My Posts';
 const description = 'Articles, guides, tutorials and more by Muhammad Fiaz.';
 
 const posts = (await getCollection('blog')).sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
