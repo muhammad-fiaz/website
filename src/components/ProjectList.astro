@@ -122,9 +122,10 @@ const { projects } = Astro.props;
 		opacity: 0;
 		transform: translateY(32px);
 		will-change: transform, opacity;
-		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-					box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-					border-color 0.3s ease;
+		transition:
+			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			border-color 0.3s ease;
 	}
 
 	/* Animation for cards that are visible on initial load */
@@ -138,22 +139,54 @@ const { projects } = Astro.props;
 	}
 
 	/* Animation delays for staggered effect - only for initial load */
-	.project-card.animate-on-load[data-index="0"] { animation-delay: 0ms; }
-	.project-card.animate-on-load[data-index="1"] { animation-delay: 100ms; }
-	.project-card.animate-on-load[data-index="2"] { animation-delay: 200ms; }
-	.project-card.animate-on-load[data-index="3"] { animation-delay: 300ms; }
-	.project-card.animate-on-load[data-index="4"] { animation-delay: 400ms; }
-	.project-card.animate-on-load[data-index="5"] { animation-delay: 500ms; }
-	.project-card.animate-on-load[data-index="6"] { animation-delay: 600ms; }
-	.project-card.animate-on-load[data-index="7"] { animation-delay: 700ms; }
-	.project-card.animate-on-load[data-index="8"] { animation-delay: 800ms; }
-	.project-card.animate-on-load[data-index="9"] { animation-delay: 900ms; }
-	.project-card.animate-on-load[data-index="10"] { animation-delay: 1000ms; }
-	.project-card.animate-on-load[data-index="11"] { animation-delay: 1100ms; }
-	.project-card.animate-on-load[data-index="12"] { animation-delay: 1200ms; }
-	.project-card.animate-on-load[data-index="13"] { animation-delay: 1300ms; }
-	.project-card.animate-on-load[data-index="14"] { animation-delay: 1400ms; }
-	.project-card.animate-on-load[data-index="15"] { animation-delay: 1500ms; }
+	.project-card.animate-on-load[data-index='0'] {
+		animation-delay: 0ms;
+	}
+	.project-card.animate-on-load[data-index='1'] {
+		animation-delay: 100ms;
+	}
+	.project-card.animate-on-load[data-index='2'] {
+		animation-delay: 200ms;
+	}
+	.project-card.animate-on-load[data-index='3'] {
+		animation-delay: 300ms;
+	}
+	.project-card.animate-on-load[data-index='4'] {
+		animation-delay: 400ms;
+	}
+	.project-card.animate-on-load[data-index='5'] {
+		animation-delay: 500ms;
+	}
+	.project-card.animate-on-load[data-index='6'] {
+		animation-delay: 600ms;
+	}
+	.project-card.animate-on-load[data-index='7'] {
+		animation-delay: 700ms;
+	}
+	.project-card.animate-on-load[data-index='8'] {
+		animation-delay: 800ms;
+	}
+	.project-card.animate-on-load[data-index='9'] {
+		animation-delay: 900ms;
+	}
+	.project-card.animate-on-load[data-index='10'] {
+		animation-delay: 1000ms;
+	}
+	.project-card.animate-on-load[data-index='11'] {
+		animation-delay: 1100ms;
+	}
+	.project-card.animate-on-load[data-index='12'] {
+		animation-delay: 1200ms;
+	}
+	.project-card.animate-on-load[data-index='13'] {
+		animation-delay: 1300ms;
+	}
+	.project-card.animate-on-load[data-index='14'] {
+		animation-delay: 1400ms;
+	}
+	.project-card.animate-on-load[data-index='15'] {
+		animation-delay: 1500ms;
+	}
 
 	@keyframes slideUpFadeIn {
 		from {
@@ -169,19 +202,25 @@ const { projects } = Astro.props;
 	/* Enhanced hover effects */
 	.project-card:hover {
 		transform: translateY(-8px) scale(1.02);
-		box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15), 0 25px 50px -12px rgb(0 0 0 / 0.1);
+		box-shadow:
+			0 25px 50px -12px rgb(0 0 0 / 0.15),
+			0 25px 50px -12px rgb(0 0 0 / 0.1);
 		border-color: rgb(59 130 246 / 0.3);
 	}
 
 	.dark .project-card:hover {
-		box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4), 0 25px 50px -12px rgb(0 0 0 / 0.2);
+		box-shadow:
+			0 25px 50px -12px rgb(0 0 0 / 0.4),
+			0 25px 50px -12px rgb(0 0 0 / 0.2);
 		border-color: rgb(59 130 246 / 0.5);
 	}
 
 	/* Focus effects for accessibility */
 	.project-card:focus-within {
 		transform: translateY(-4px);
-		box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+		box-shadow:
+			0 20px 25px -5px rgb(0 0 0 / 0.1),
+			0 10px 10px -5px rgb(0 0 0 / 0.04);
 		border-color: rgb(59 130 246 / 0.5);
 		outline: 2px solid rgb(59 130 246 / 0.3);
 		outline-offset: 2px;
@@ -239,10 +278,10 @@ const { projects } = Astro.props;
 	document.addEventListener('DOMContentLoaded', () => {
 		const allCards = document.querySelectorAll('.project-card');
 		const viewportHeight = window.innerHeight;
-		
+
 		allCards.forEach((card, index) => {
 			const cardTop = card.getBoundingClientRect().top;
-			
+
 			// Cards visible on initial load get immediate staggered animation
 			if (cardTop < viewportHeight) {
 				card.classList.add('animate-on-load');
@@ -253,7 +292,7 @@ const { projects } = Astro.props;
 		});
 
 		// Enhanced hover effects with cursor tracking
-		allCards.forEach(card => {
+		allCards.forEach((card) => {
 			card.addEventListener('mouseenter', (e) => {
 				e.target.style.willChange = 'transform';
 			});
@@ -269,10 +308,10 @@ const { projects } = Astro.props;
 				const y = e.clientY - rect.top;
 				const centerX = rect.width / 2;
 				const centerY = rect.height / 2;
-				
+
 				const rotateX = (y - centerY) / 20;
 				const rotateY = (centerX - x) / 20;
-				
+
 				card.style.transform = `translateY(-8px) scale(1.02) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 			});
 

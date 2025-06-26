@@ -1,5 +1,4 @@
 ---
-
 const title = 'Muhammad Fiaz | Full Stack Developer';
 const description = 'Welcome to my portfolio! Discover my latest projects, skills, and professional journey as a full stack developer.';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -13,24 +12,24 @@ import TechStack from '@src/components/TechStack.astro';
 
 <BaseLayout title={title} description={description}>
 	<!-- Hero section - fixed and centered, full viewport -->
-	<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="0">
+	<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='0'>
 		<Hero />
 	</div>
-	
+
 	<!-- Other sections - normal scroll flow -->
 	<div class='container mx-auto px-4'>
 		<main class='flex flex-col gap-16 relative z-10'>
-			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="200">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='200'>
 				<Experience />
 			</div>
-			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="400">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='400'>
 				<TechStack />
 			</div>
 			<!-- <RecentPosts /> -->
-			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="600">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='600'>
 				<RecentProjects />
 			</div>
-			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay="800">
+			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='800'>
 				<QNA />
 			</div>
 		</main>
@@ -45,11 +44,11 @@ import TechStack from '@src/components/TechStack.astro';
 	let forward = true;
 	let lastTime = 0;
 	const forwardDelay = 120; // Slower typing
-	const backwardDelay = 60;  // Slower deletion
-	
+	const backwardDelay = 60; // Slower deletion
+
 	function typeLoop(currentTime) {
 		if (!el) return;
-		
+
 		if (currentTime - lastTime >= (forward ? forwardDelay : backwardDelay)) {
 			if (forward) {
 				el.textContent = text.slice(0, i);
@@ -71,10 +70,10 @@ import TechStack from '@src/components/TechStack.astro';
 				}
 			}
 		}
-		
+
 		requestAnimationFrame(typeLoop);
 	}
-	
+
 	requestAnimationFrame(typeLoop);
 
 	// Smooth, slow fade-in animations with gentle timing
@@ -88,17 +87,18 @@ import TechStack from '@src/components/TechStack.astro';
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
-					
+
 					// Triple requestAnimationFrame for ultra-smooth start
 					requestAnimationFrame(() => {
 						requestAnimationFrame(() => {
 							requestAnimationFrame(() => {
 								setTimeout(() => {
 									// Very slow, gentle transition with smooth easing
-									entry.target.style.transition = 'opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.8s cubic-bezier(0.25, 0.1, 0.25, 1)';
+									entry.target.style.transition =
+										'opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.8s cubic-bezier(0.25, 0.1, 0.25, 1)';
 									entry.target.style.opacity = '1';
 									entry.target.style.transform = 'translateY(0px) scale(1)';
-									
+
 									// Clean up will-change after animation completes
 									setTimeout(() => {
 										entry.target.style.willChange = 'auto';
@@ -116,7 +116,7 @@ import TechStack from '@src/components/TechStack.astro';
 		// Gentle section preparation with subtle initial transforms
 		function prepareSections() {
 			const sections = document.querySelectorAll('.animate-section');
-			
+
 			// Very gentle initial state for smooth fade-in
 			sections.forEach((section) => {
 				section.style.opacity = '0';
@@ -125,7 +125,7 @@ import TechStack from '@src/components/TechStack.astro';
 				section.style.backfaceVisibility = 'hidden';
 				section.style.perspective = '1000px';
 			});
-			
+
 			// Smooth layout calculation
 			document.body.offsetHeight;
 		}
@@ -133,7 +133,7 @@ import TechStack from '@src/components/TechStack.astro';
 		// Gentle animation start
 		function startSectionAnimations() {
 			prepareSections();
-			
+
 			requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
 					document.querySelectorAll('.animate-section').forEach((section) => {
@@ -147,12 +147,9 @@ import TechStack from '@src/components/TechStack.astro';
 		function isSplashScreenGone() {
 			const splash = document.getElementById('splash-screen');
 			if (!splash) return true;
-			
+
 			const style = window.getComputedStyle(splash);
-			return style.display === 'none' || 
-				   style.opacity === '0' || 
-				   style.visibility === 'hidden' ||
-				   splash.classList.contains('hidden');
+			return style.display === 'none' || style.opacity === '0' || style.visibility === 'hidden' || splash.classList.contains('hidden');
 		}
 
 		// Patient splash screen waiting
@@ -164,7 +161,7 @@ import TechStack from '@src/components/TechStack.astro';
 				}
 
 				let resolved = false;
-				
+
 				const checkInterval = setInterval(() => {
 					if (!resolved && isSplashScreenGone()) {
 						resolved = true;

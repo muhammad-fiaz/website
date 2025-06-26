@@ -10,9 +10,13 @@ import { Schema } from 'astro-seo-schema';
 <BaseLayout title={title} description={description}>
 	<div class='container'>
 		<div class='mb-10 text-center animate-header'>
-			<h1 class='text-3xl font-bold mb-2 header-element' data-delay="0">All My Projects</h1>
-			<p class='text-zinc-700 dark:text-zinc-300 text-lg header-element transition-all duration-300 ease-in-out cursor-default hover:transform hover:-translate-y-px hover:text-blue-500 dark:hover:text-blue-300' data-delay="1">All my project portfolio from real projects to open source projects.</p>
-			<div class='flex justify-center header-element' data-delay="2">
+			<h1 class='text-3xl font-bold mb-2 header-element' data-delay='0'>All My Projects</h1>
+			<p
+				class='text-zinc-700 dark:text-zinc-300 text-lg header-element transition-all duration-300 ease-in-out cursor-default hover:transform hover:-translate-y-px hover:text-blue-500 dark:hover:text-blue-300'
+				data-delay='1'>
+				All my project portfolio from real projects to open source projects.
+			</p>
+			<div class='flex justify-center header-element' data-delay='2'>
 				<input
 					id='project-search'
 					type='text'
@@ -66,7 +70,8 @@ import { Schema } from 'astro-seo-schema';
 		}
 
 		@keyframes pulse {
-			0%, 100% {
+			0%,
+			100% {
 				opacity: 1;
 			}
 			50% {
@@ -90,9 +95,15 @@ import { Schema } from 'astro-seo-schema';
 			animation: slideUpFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 		}
 
-		.header-element[data-delay="0"] { animation-delay: 0ms; }
-		.header-element[data-delay="1"] { animation-delay: 100ms; }
-		.header-element[data-delay="2"] { animation-delay: 200ms; }
+		.header-element[data-delay='0'] {
+			animation-delay: 0ms;
+		}
+		.header-element[data-delay='1'] {
+			animation-delay: 100ms;
+		}
+		.header-element[data-delay='2'] {
+			animation-delay: 200ms;
+		}
 
 		.projects-container {
 			opacity: 0;
@@ -103,7 +114,15 @@ import { Schema } from 'astro-seo-schema';
 
 		/* Loading state for search - custom striped background animation */
 		.search-input.searching {
-			background-image: linear-gradient(45deg, transparent 25%, rgba(59, 130, 246, 0.1) 25%, rgba(59, 130, 246, 0.1) 50%, transparent 50%, transparent 75%, rgba(59, 130, 246, 0.1) 75%);
+			background-image: linear-gradient(
+				45deg,
+				transparent 25%,
+				rgba(59, 130, 246, 0.1) 25%,
+				rgba(59, 130, 246, 0.1) 50%,
+				transparent 50%,
+				transparent 75%,
+				rgba(59, 130, 246, 0.1) 75%
+			);
 			background-size: 20px 20px;
 			animation: searchingAnimation 1s linear infinite;
 		}
