@@ -24,7 +24,7 @@
 		"@astrojs/sitemap": "^3.4.2",
 		"@astrojs/vercel": "^8.2.3",
 		"@tailwindcss/vite": "^4.1.11",
-		"astro": "^5.12.2",
+		"astro": "^5.12.9",
 		"astro-robots-txt": "^1.0.0",
 		"astro-seo-schema": "^5.0.0",
 		"schema-dts": "^1.1.5",
