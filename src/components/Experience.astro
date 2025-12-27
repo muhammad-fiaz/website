@@ -1,6 +1,17 @@
 ---
-const experiences = [
-/* 
+interface ExperienceItem {
+	title: string;
+	company?: string;
+	location?: string;
+	type?: string;
+	period: string;
+	color: string;
+	link?: string;
+	description: string;
+}
+
+const experiences: ExperienceItem[] = [
+	/*
 	{
 		title: '',
 		company: '',
