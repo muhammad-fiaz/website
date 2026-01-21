@@ -2,7 +2,7 @@
 const title = 'Muhammad Fiaz | Full Stack Developer';
 const description = 'Welcome to my portfolio! Discover my latest projects, skills, and professional journey as a full stack developer.';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Experience from '../components/Experience.astro';
+
 // import RecentPosts from '../layouts/components/RecentPosts.astro';
 import QNA from '../components/QNA.astro';
 import RecentProjects from '../components/RecentProjects.astro';
@@ -19,9 +19,11 @@ import TechStack from '@src/components/TechStack.astro';
 	<!-- Other sections - normal scroll flow -->
 	<div class='container mx-auto px-4'>
 		<main class='flex flex-col gap-16 relative z-10'>
+			<!--
 			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='200'>
 				<Experience />
 			</div>
+			-->
 			<div class='animate-section opacity-0 transform translate-y-8 scale-98' data-delay='400'>
 				<TechStack />
 			</div>
