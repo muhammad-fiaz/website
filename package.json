@@ -22,7 +22,7 @@
 		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/rss": "^4.0.14",
 		"@astrojs/sitemap": "^3.6.0",
-		"@astrojs/vercel": "^9.0.2",
+		"@astrojs/vercel": "^10.0.2",
 		"@tailwindcss/vite": "^4.1.18",
 		"astro": "^5.18.1",
 		"astro-robots-txt": "^1.0.0",
