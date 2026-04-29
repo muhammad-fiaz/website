@@ -7,12 +7,10 @@
 
 This is the source code for my portfolio website, built using [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 
-- **Live Site**: [https://v3.muhammadfiaz.com](https://v3.muhammadfiaz.com)
 - **GitHub Repository**: [https://github.com/muhammad-fiaz/website](https://github.com/muhammad-fiaz/website)
 
-## Home Page
-
-The home page showcases my professional profile, projects, and ways to contact me. Visit it at [https://v3.muhammadfiaz.com](https://v3.muhammadfiaz.com).
+✅ For the latest portfolio, visit here:
+https://github.com/muhammad-fiaz/portfolio
 
 ## Issues
 
